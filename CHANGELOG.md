@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.1.0-drc.0](https://github.com/jakbytes/version_actions/compare/v0.0.1...v0.1.0-drc.0) (2024-02-07)
+## [v0.1.0-src.0](https://github.com/jakbytes/version_actions/compare/v0.0.1...v0.1.0-src.0) (2024-02-07)
 ### Features
 
 - ([`bd3c539`](https://github.com/jakbytes/version_actions/commit/bd3c539485ed2326b9f53b05ed2bccba9989aae5)) support debug types in conventional commit syntax
