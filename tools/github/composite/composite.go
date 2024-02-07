@@ -6,7 +6,6 @@ import (
 	"github.com/rs/zerolog/log"
 	"io"
 	"os"
-	"regexp"
 	"version_actions/internal/utility"
 	"version_actions/tools/changelog"
 	"version_actions/tools/conventional"
@@ -156,7 +155,6 @@ func (h *Handler) setBranch(name string) {
 	}
 
 	branch, err := h.Repository().Branch(name)
-	log.Debug().Msgf("branch: %v, %v", branch, err)
 	if errors.Is(err, github.BranchNotFound{Name: name}) {
 		h.hb, err = h.Repository().CreateBranch(name, head.Commit.SHA)
 	} else if err == nil {
@@ -166,41 +164,6 @@ func (h *Handler) setBranch(name string) {
 	if err != nil {
 		panic(err)
 	}
-}
-
-func (h *Handler) updateActionYaml(files []github.File) []github.File {
-	filesToUpdate := []string{"pull_request/action.yml", "version/action.yml"}
-	for _, file := range filesToUpdate {
-		log.Debug().Msgf("Updating version in %s", file)
-		value, err := updateVersionInYaml(file, "v"+h.NextVersion().String())
-		if err != nil {
-			panic(err)
-		}
-		files = append(files, github.File{Path: file, Content: value})
-	}
-
-	return files
-}
-
-// Function to update the version in the Yaml files
-func updateVersionInYaml(filePath, newVersion string) (string, error) {
-	// Read the content of the YML file
-	content, err := os.ReadFile(filePath)
-	if err != nil {
-		return "", err
-	}
-
-	// Convert the content to a string
-	text := string(content)
-
-	// Define a regex pattern to find the version string following `/tags/`
-	pattern := `(/tags/)[^\s"]+`
-	re := regexp.MustCompile(pattern)
-
-	// Replace the found pattern with the new version
-	updatedText := re.ReplaceAllString(text, "${1}"+newVersion)
-
-	return updatedText, nil
 }
 
 func (h *Handler) updateAdditionalFiles(files []github.File) []github.File {
@@ -220,10 +183,6 @@ func (h *Handler) updateAdditionalFiles(files []github.File) []github.File {
 func (h *Handler) commitChangelog() {
 	log.Info().Msg("Committing changelog")
 	files := []github.File{{Path: "CHANGELOG.md", Content: h.fullChangelog.String()}}
-	if h.Owner == "jakbytes" && h.Name == "version_actions" {
-		files = h.updateActionYaml(files)
-	}
-
 	files = h.updateAdditionalFiles(files)
 
 	newTreeSHA, parentCommitSHA, err := h.head().AddFiles(files)

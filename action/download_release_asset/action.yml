@@ -37,7 +37,7 @@ runs:
           curl -sL -o "${{ inputs.file_name }}" "$DOWNLOAD_URL"
           
           if [[ "${{ inputs.make_executable }}" == "true" ]]; then
-            chmod +x "${{ inputs.file_name }}"
+            chmod +x ${{ inputs.file_name }}
             echo "File set as executable."
           fi
         fi
