@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/google/go-github/v58/github"
+	"github.com/rs/zerolog/log"
 )
 
 // Branch is a struct that contains the RepositoriesService, context, token, owner, name, and branch. It is used to
@@ -55,6 +56,11 @@ func (b *Branch) GetCommitsSinceCommit(hash *string) (map[string]*github.Reposit
 			return nil, err
 		}
 		for _, commit := range pages {
+			if hash != nil {
+				log.Debug().Msgf("> Commit: %s", *commit.SHA)
+				log.Debug().Msgf(">   Hash: %s", *hash)
+				log.Debug().Msgf(">  Equal: %t", *commit.SHA == *hash)
+			}
 			if hash != nil && *commit.SHA == *hash {
 				return commits, nil // return if we've reached the hash commit
 			}

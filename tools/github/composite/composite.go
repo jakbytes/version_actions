@@ -68,14 +68,23 @@ func (h *Handler) gatherVersions() {
 
 func (h *Handler) Commits() (commits *conventional.Commits) {
 	if h.commits == nil {
+		var err error
+		var raw map[string]*github.RepositoryCommit
 		var sha *string
-		if h.Latest != nil {
-			sha = h.Latest.Commit.SHA
-			log.Debug().Msgf("Getting commits since %s", *sha)
-		}
-		raw, err := h.head().GetCommitsSinceCommit(sha)
-		if err != nil {
-			panic(err)
+		if h.Head == h.ReleaseBranch {
+			if h.Latest != nil {
+				sha = h.Latest.Commit.SHA
+				log.Debug().Msgf("Getting commits since %s", *sha)
+			}
+			raw, err = h.head().GetCommitsSinceCommit(sha)
+			if err != nil {
+				panic(err)
+			}
+		} else {
+			raw, err = h.head().GetDistinctCommits(h.ReleaseBranch)
+			if err != nil {
+				panic(err)
+			}
 		}
 		c := conventional.ParseCommits(raw)
 		h.commits = &c

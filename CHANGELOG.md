@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.1.0-src.0](https://github.com/jakbytes/version_actions/compare/v0.0.1...v0.1.0-src.0) (2024-02-07)
+### Features
+
+- ([`bd3c539`](https://github.com/jakbytes/version_actions/commit/bd3c539485ed2326b9f53b05ed2bccba9989aae5)) support debug types in conventional commit syntax
+
+### Fixes
+
+- ([`2b1b493`](https://github.com/jakbytes/version_actions/commit/2b1b49317a8c94f1bb411fdef538e524c81986ef)) release action needs to use the correct file for the release asset
+
+### Debugging
+
+- ([`ff81697`](https://github.com/jakbytes/version_actions/commit/ff81697d995cf560e47f030abff969c92b01a50c)) occasionally the list of commits does not stop at the correct hash, logging behavior
+
 ## [v0.0.1](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.0.1) (2024-02-07)
 ### Fixes
 

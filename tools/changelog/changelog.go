@@ -51,6 +51,7 @@ func GenerateNewChangelog(org, repo string, previousVersion, version *semver.Ver
 		{"Test", commits.Test},
 		{"Build", commits.Build},
 		{"CI/CD", commits.CI},
+		{"Debugging", commits.Debug},
 	}
 
 	for _, section := range sections {
