@@ -2,13 +2,15 @@
 
 ---
 
-## [v0.0.0] Initial Version _2024-02-07 01:29 UTC_
+## [v0.0.0] Initial Version _2024-02-07 02:10 UTC_
 ### Features
 
 - ([`c0d1dcd`](https://github.com/jakbytes/version_actions/commit/c0d1dcd0e3483390d8d7405569bcf3eadcce5710)) initial supported actions, version, sync, pull_request, extract_commit, download_release_asset
 
 ### Fixes
 
+- ([`1a481d7`](https://github.com/jakbytes/version_actions/commit/1a481d72d0715ae6d7d88a9b434502513529c18c)) should be using v4 actions checkout
+- ([`1487ff3`](https://github.com/jakbytes/version_actions/commit/1487ff34f740541c9cb5aa3345aa14e6d1d93abc)) commits should be freeform to allow release and others
 - ([`68906c8`](https://github.com/jakbytes/version_actions/commit/68906c816d30d62c6f67c4a35b5e6003ccd74fbf)) download_release_asset shouldnt have quotes around the chmod val, version should not modify yml
 - ([`42328c0`](https://github.com/jakbytes/version_actions/commit/42328c0dc7d95b59e58c1373f678834420f8c329)) actions should reference version_action, not action
 - ([`8d24825`](https://github.com/jakbytes/version_actions/commit/8d24825ef39953f45c2fae275b420777c635ba5c)) a few more references to the old path were not adjusted
