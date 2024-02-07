@@ -1,0 +1,35 @@
+name: 'Automated Pull Request Action'
+description: 'Automatically opens a draft pull request'
+inputs:
+  token:
+    description: 'GitHub token for creating and updating pull requests'
+    required: true
+  base:
+    description: 'The base branch to open the pull request against'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Get latest release
+      shell: bash
+      id: get-latest-release
+      run: |
+        LATEST_RELEASE_URL=$(curl -s -H "Authorization: token ${{ inputs.token }}" \
+        "https://api.github.com/repos/jakbytes/version_actions/releases/tags/v0.0.0-drc.0" \
+        | jq -r '.assets[] | select(.name == "action") | .browser_download_url')
+        echo "Latest release URL is $LATEST_RELEASE_URL"
+        echo "LATEST_RELEASE_URL=$LATEST_RELEASE_URL" >> $GITHUB_ENV # Fetching last two commits for commit message analysis
+
+    - name: Download latest release asset
+      shell: bash
+      run: |
+        curl -sL -o action ${{ env.LATEST_RELEASE_URL }}
+        chmod +x action
+
+    - name: Run Action
+      shell: bash
+      run: |
+        ./action pull_request ${{ inputs.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }} ${{ inputs.base }}

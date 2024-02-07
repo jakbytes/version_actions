@@ -1,0 +1,43 @@
+name: 'Download GitHub Release Asset'
+description: 'Downloads a specified asset from a GitHub release.'
+inputs:
+  repository_owner:
+    description: 'Owner of the repository'
+    required: true
+  repository_name:
+    description: 'Name of the repository'
+    required: true
+  tag:
+    description: 'Release tag from which to download the asset'
+    required: true
+  file_name:
+    description: 'Name of the file to download'
+    required: true
+  make_executable:
+    description: 'Set the downloaded file as executable with chmod +x'
+    required: false
+    default: 'false'
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      env:
+        REPOSITORY_OWNER: ${{ inputs.repository_owner }}
+        REPOSITORY_NAME: ${{ inputs.repository_name }}
+        TAG: ${{ inputs.tag }}
+        FILE_NAME: ${{ inputs.file_name }}
+      run: |
+        # Check if the file already exists
+        if [ -e "${{ inputs.file_name }}" ]; then
+          echo "Warning: File '${{ inputs.file_name }}' already exists. Skipping download."
+        else
+          DOWNLOAD_URL="https://github.com/${{ inputs.repository_owner }}/${{ inputs.repository_name }}/releases/download/${{ inputs.tag }}/${{ inputs.file_name }}"
+          echo "Download URL: $DOWNLOAD_URL"
+          
+          curl -sL -o "${{ inputs.file_name }}" "$DOWNLOAD_URL"
+          
+          if [[ "${{ inputs.make_executable }}" == "true" ]]; then
+            chmod +x "${{ inputs.file_name }}"
+            echo "File set as executable."
+          fi
+        fi

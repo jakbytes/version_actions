@@ -1,0 +1,68 @@
+name: 'Automated Pull Request Action'
+description: 'Automatically opens a draft pull request'
+inputs:
+  token:
+    description: 'GitHub token for creating and updating pull requests'
+    required: true
+  base:
+    description: 'The base branch to open the pull request against'
+    required: true
+  prerelease:
+    description: 'The prerelease identifier to use for prerelease versions'
+    required: false
+    default: "rc"
+  release_branch:
+    description: 'The primary release branch if it is not the default repository branch'
+    required: false
+    default: "."
+  trigger:
+    description: 'The action trigger commit message, set manually'
+    required: false
+    default: "none"
+  commitFiles:
+    description: 'List of of additional files paths to include in the release commit. For example: "file1.txt file2.txt"'
+    required: false
+    default: ""
+outputs:
+  version:
+    description: 'The next version number'
+    value: ${{ steps.version.outputs.version }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Download Action
+      env:
+        VERSION: ${{ github.action_ref }}
+      uses: jakbytes/version_actions/download_release_asset@internal
+      with:
+        repository_owner: 'jakbytes'
+        repository_name: 'version_actions'
+        tag: ${{ env.VERSION }}
+        file_name: 'action'
+        make_executable: true
+
+    - name: Extract Commit
+      id: commit
+      if: ${{ inputs.trigger }} != 'none'
+      uses: jakbytes/version_actions/extract_commit@internal
+
+    - name: Run Action
+      id: version
+      shell: bash
+      if: env.ACTION_TRIGGER != 'sync'
+      env:
+        ACTION_TRIGGER: ${{ inputs.trigger }} || ${{ steps.commit.outputs.type }}
+      run: |
+        ./action version ${{ inputs.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }} ${{ inputs.base }} ${{ inputs.prerelease }} ${{ inputs.release_branch }} ${{ env.ACTION_TRIGGER }} ${{ inputs.commitFiles }}
+
+    - uses: actions/upload-artifact@v4
+      if: inputs.trigger != 'promote' && inputs.trigger != 'sync'
+      with:
+        name: release-notes
+        path: |
+          release.txt

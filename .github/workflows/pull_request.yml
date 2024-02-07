@@ -1,0 +1,60 @@
+name: Automatic Pull Request
+
+on:
+  push:
+    branches:
+      - '**/feature/**'
+      - '**/fix/**'
+      - '**/hotfix/**'
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.21.6
+
+      - name: Test
+        run: |
+          go test -v ./... -coverprofile=coverage.out
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  pull_request:
+    name: Set Pull Request
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}
+
+      - name: Configure Git for GitHub Actions
+        run: |
+          git config --global user.email "git.automations.bot@gmail.com"
+          git config --global user.name "automations-bot"
+          
+      - name: Set Environment Variables
+        run: |
+          if [ "${{ github.ref_name }}" == "development" ]; then
+            echo "BASE_BRANCH=staging" >> $GITHUB_ENV
+          elif [ "${{ github.ref_name }}" == "staging" ]; then
+            echo "BASE_BRANCH=main" >> $GITHUB_ENV
+          else
+            echo "BASE_BRANCH=none" >> $GITHUB_ENV
+          fi
+
+      - name: Automated Pull Request
+        uses: jakbytes/version_actions/pull_request@internal
+        if: env.BASE_BRANCH != 'none'
+        with:
+          token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}
+          base: ${{ env.BASE_BRANCH }}

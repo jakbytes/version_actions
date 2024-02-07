@@ -1,0 +1,43 @@
+name: 'Extract Commit Type'
+description: 'Extracts the last valid conventional commit.'
+outputs:
+  type:
+    description: 'The type of the last valid conventional commit'
+    value: ${{ steps.extract_commit.outputs.type }}
+  description:
+    description: 'The description of the last valid conventional commit'
+    value: ${{ steps.extract_commit.outputs.description }}
+  scope:
+    description: 'The scope of the last valid conventional commit'
+    value: ${{ steps.extract_commit.outputs.scope }}
+  exclamation:
+    description: 'The exclamation of the last valid conventional commit'
+    value: ${{ steps.extract_commit.outputs.exclamation }}
+  body:
+    description: 'The body of the last valid conventional commit'
+    value: ${{ steps.extract_commit.outputs.body }}
+  footer:
+    description: 'The footer of the last valid conventional commit'
+    value: ${{ steps.extract_commit.outputs.footer }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Download Action
+      env:
+        VERSION: ${{ github.action_ref }}
+      uses: jakbytes/version_actions/action/download_release_asset@internal
+      with:
+        repository_owner: 'jakbytes'
+        repository_name: 'version_actions'
+        tag: ${{ env.VERSION }}
+        file_name: 'action'
+        make_executable: true
+
+    - name: Run Action
+      id: extract_commit
+      shell: bash
+      run: |
+        ./action extract_commit ${{ github.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }}

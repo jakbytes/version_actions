@@ -1,0 +1,178 @@
+package changelog
+
+import (
+	"bufio"
+	"errors"
+	"fmt"
+	"github.com/google/go-github/v58/github"
+	"io/fs"
+	"os"
+	"strings"
+	"time"
+	"version_actions/internal/utility"
+	"version_actions/tools/conventional"
+	"version_actions/tools/semver"
+)
+
+type Markdown []string
+
+func (b Markdown) String() (s string) {
+	var sb strings.Builder
+	for i, line := range b {
+		if i != len(b)-1 {
+			sb.WriteString(line + "\n")
+		} else { // last line
+			sb.WriteString(line)
+		}
+	}
+	return sb.String()
+}
+
+var Path = "CHANGELOG.md"
+
+type Section struct {
+	Title   string
+	Commits []*github.RepositoryCommit
+}
+
+// GenerateNewChangelog generates a Markdown formatted changelog from the provided GitHub commits. It is intended to
+// aggregate the changes from just the commits since the previous version.
+func GenerateNewChangelog(org, repo string, previousVersion, version *semver.Version, commits conventional.Commits, disableVersionHeader bool) (body Markdown) {
+	body = append(body, generateVersionHeader(org, repo, previousVersion, version, disableVersionHeader))
+
+	sections := []Section{
+		{"Breaking Changes", commits.Breaking},
+		{"Features", commits.Feat},
+		{"Fixes", commits.Fix},
+		{"Documentation", commits.Docs},
+		{"Styles", commits.Style},
+		{"Refactors", commits.Refactor},
+		{"Performance", commits.Perf},
+		{"Test", commits.Test},
+		{"Build", commits.Build},
+		{"CI/CD", commits.CI},
+	}
+
+	for _, section := range sections {
+		if len(section.Commits) > 0 {
+			body = append(body, fmt.Sprintf("### %s", section.Title), "")
+			for _, commit := range section.Commits {
+				body = append(body, formatCommit(org, repo, commit)...)
+			}
+			body = append(body, "")
+		}
+	}
+
+	return
+}
+
+func generateVersionHeader(org, repo string, previousVersion, version *semver.Version, disableVersionHeader bool) string {
+	currentDate := time.Now().UTC().Format("2006-01-02 15:04") + " UTC"
+
+	if disableVersionHeader {
+		return "## Changelog"
+	} else if previousVersion != nil {
+		// Header for the version with GitHub compare link
+		return fmt.Sprintf("## [v%s](https://github.com/%s/%s/compare/v%s...v%s) _%s_", version, org, repo, previousVersion, version, currentDate)
+	} else {
+		return fmt.Sprintf("## [v%s] Initial Version _%s_", version, currentDate)
+	}
+}
+
+func formatCommit(org, repo string, commit *github.RepositoryCommit) Markdown {
+	// Extracting the first line of the commit message
+	message := strings.TrimSpace(strings.Split(*commit.Commit.Message, ":")[1])
+
+	// Extracting a short commit hash
+	shortSHA := (*commit.SHA)[:7]
+
+	// Creating the Markdown formatted string
+	return Markdown{
+		fmt.Sprintf("- ([`%s`](https://github.com/%s/%s/commit/%s)) %s", shortSHA, org, repo, *commit.SHA, message),
+	}
+}
+
+// Determines whether a line should be skipped.
+func shouldSkipLine(line string, currentVersion, skipNextBreak, skipNextSpace *bool, versionHeading string) bool {
+	if strings.HasPrefix(line, "# Changelog") {
+		*skipNextBreak = true
+		*skipNextSpace = true
+		return true
+	}
+
+	if strings.HasPrefix(line, versionHeading) {
+		*currentVersion = true
+		return true
+	}
+
+	if strings.HasPrefix(line, "---") {
+		if *skipNextBreak {
+			*skipNextBreak = false
+			*skipNextSpace = true
+			return true
+		}
+		*currentVersion = false
+	}
+
+	if *skipNextSpace {
+		*skipNextSpace = false
+		return true
+	}
+
+	return *currentVersion
+}
+
+func updateChangelog(version *semver.Version, lines Markdown) (Markdown, error) {
+	err := utility.Open(Path, func(file *os.File) (err error) {
+		versionHeading := "## [v" + strings.Split(version.String(), "-")[0]
+		currentVersion := false
+		skipNextBreak := false
+		skipNextSpace := false
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			line := scanner.Text()
+			if shouldSkipLine(line, &currentVersion, &skipNextBreak, &skipNextSpace, versionHeading) {
+				continue
+			}
+
+			lines = append(lines, line)
+		}
+		return nil
+	})
+
+	return lines, err
+}
+
+var UpdateChangelog = updateChangelog
+
+func WriteChangelog(org, repo string, previousVersion, version *semver.Version, commits conventional.Commits, disableVersionHeader bool) (Markdown, Markdown, error) {
+	changelog := GenerateNewChangelog(org, repo, previousVersion, version, commits, disableVersionHeader)
+	lines := append(Markdown{"# Changelog", "", "---", ""}, changelog...) // initialize lines with the header and version changelog
+	_, err := os.Stat(Path)
+	if !errors.Is(err, fs.ErrNotExist) { // CHANGELOG.md exists, update the file with the new version changelog and retain the rest of the file
+		lines, err = UpdateChangelog(version, lines)
+		if err != nil {
+			return nil, nil, err
+		}
+	}
+	return changelog, lines, WriteToFile(Path, lines)
+}
+
+func writeString(file *os.File, line string) error {
+	_, err := file.WriteString(line + "\n")
+	return err
+}
+
+var WriteString = writeString
+
+func WriteToFile(path string, lines Markdown) error {
+	return utility.Create(path, func(file *os.File) error {
+		for _, line := range lines {
+			err := WriteString(file, line)
+			if err != nil {
+				return err
+			}
+		}
+		return nil
+	})
+}
