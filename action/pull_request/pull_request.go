@@ -65,11 +65,7 @@ func composeBody(head *github.Branch, base string, existing *string) (body chang
 		body = append(changelog.Markdown{
 			":robot: I have created a pull request *beep* *boop*",
 			"",
-			"---",
-			"",
 			"### Notes",
-			"",
-			"---",
 			"",
 			"You can add your personal notes here (above the 'Changelog' section). To ensure your notes and the " +
 				"automated changelog updates are maintained correctly, keep the 'Changelog' marker in place. If the " +

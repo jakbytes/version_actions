@@ -73,7 +73,7 @@ func generateVersionHeader(org, repo string, previousVersion, version *semver.Ve
 		return "## Changelog"
 	} else if previousVersion != nil {
 		// Header for the version with GitHub compare link
-		return fmt.Sprintf("## [v%s](https://github.com/%s/%s/compare/v%s...v%s) _%s_", version, org, repo, previousVersion, version, currentDate)
+		return fmt.Sprintf("## [v%s](https://github.com/%s/%s/compare/v%s...v%s) (%s)", version, org, repo, previousVersion, version, currentDate)
 	} else {
 		return fmt.Sprintf("## [v%s] Initial Version (%s)", version, currentDate)
 	}
@@ -93,7 +93,7 @@ func formatCommit(org, repo string, commit *github.RepositoryCommit) Markdown {
 }
 
 // Determines whether a line should be skipped.
-func shouldSkipLine(line string, currentVersion, skipNextBreak, skipNextSpace *bool, versionHeading string) bool {
+func skipLine(line string, currentVersion, skipNextBreak, skipNextSpace *bool, versionHeading string) bool {
 	if strings.HasPrefix(line, "# Changelog") {
 		*skipNextBreak = true
 		*skipNextSpace = true
@@ -103,6 +103,8 @@ func shouldSkipLine(line string, currentVersion, skipNextBreak, skipNextSpace *b
 	if strings.HasPrefix(line, versionHeading) {
 		*currentVersion = true
 		return true
+	} else if strings.HasPrefix(line, "## [") {
+		*currentVersion = false
 	}
 
 	if strings.HasPrefix(line, "---") {
@@ -111,7 +113,6 @@ func shouldSkipLine(line string, currentVersion, skipNextBreak, skipNextSpace *b
 			*skipNextSpace = true
 			return true
 		}
-		*currentVersion = false
 	}
 
 	if *skipNextSpace {
@@ -131,7 +132,8 @@ func updateChangelog(version *semver.Version, lines Markdown) (Markdown, error) 
 		scanner := bufio.NewScanner(file)
 		for scanner.Scan() {
 			line := scanner.Text()
-			if shouldSkipLine(line, &currentVersion, &skipNextBreak, &skipNextSpace, versionHeading) {
+			skip := skipLine(line, &currentVersion, &skipNextBreak, &skipNextSpace, versionHeading)
+			if skip {
 				continue
 			}
 
@@ -147,7 +149,7 @@ var UpdateChangelog = updateChangelog
 
 func WriteChangelog(org, repo string, previousVersion, version *semver.Version, commits conventional.Commits, disableVersionHeader bool) (Markdown, Markdown, error) {
 	changelog := GenerateNewChangelog(org, repo, previousVersion, version, commits, disableVersionHeader)
-	lines := append(Markdown{"# Changelog", "", "---", ""}, changelog...) // initialize lines with the header and version changelog
+	lines := append(Markdown{"# Changelog", ""}, changelog...) // initialize lines with the header and version changelog
 	_, err := os.Stat(Path)
 	if !errors.Is(err, fs.ErrNotExist) { // CHANGELOG.md exists, update the file with the new version changelog and retain the rest of the file
 		lines, err = UpdateChangelog(version, lines)

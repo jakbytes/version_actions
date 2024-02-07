@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/google/go-github/v58/github"
-	"github.com/rs/zerolog/log"
 	"version_actions/tools/changelog"
 )
 
@@ -72,23 +71,19 @@ func (c *Client) EditPullRequest(head, base, title string, body changelog.Markdo
 
 func (c *Client) SetPullRequest(head, base, title string, draft bool, composeBody func(body *string) (changelog.Markdown, error)) error {
 	pr, err := c.GetPullRequest(head, base)
-	log.Debug().Msgf("pr: %v, %v", pr, err)
 	if err != nil && !errors.Is(err, NoPullRequestFoundError{Head: head, Base: base}) {
 		return fmt.Errorf("unable to verify if existing pull request exists: %w", err)
 	}
 
 	body, err := composeBody(pr.Body)
-	log.Debug().Msgf("body: %v, %v", body, err)
 	if err != nil {
 		return fmt.Errorf("failed to compose pull request body: %w", err)
 	}
 
 	if pr.Body == nil {
 		_, err = c.CreatePullRequest(head, base, title, body, draft)
-		log.Debug().Msgf("create: %v", err)
 	} else {
 		_, err = c.EditPullRequest(head, base, title, body)
-		log.Debug().Msgf("edit: %v", err)
 	}
 	return err
 }

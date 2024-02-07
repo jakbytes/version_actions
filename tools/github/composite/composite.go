@@ -114,14 +114,6 @@ func (h *Handler) head() *github.Branch {
 //   - if prerelease: ":robot: I have created a release candidate *beep* *boop*"
 //   - else: ":robot: I have created a release *beep* *boop*"
 func (h *Handler) PullRequest() error {
-	log.Debug().Msgf("owner: %s", h.Owner)
-	log.Debug().Msgf("name: %s", h.Name)
-	log.Debug().Msgf("head: %s", h.Head)
-	log.Debug().Msgf("base: %s", h.Base)
-	log.Debug().Msgf("prereleaseIdentifier: %s", h.PrereleaseIdentifier)
-	log.Debug().Msgf("releaseBranch: %s", h.ReleaseBranch)
-	log.Debug().Msgf("base(): %s", h.base().Name)
-	log.Debug().Msgf("head(): %s", h.head().Name)
 	h.gatherVersions()
 	h.gatherChangelog()
 	h.composePullRequest()
