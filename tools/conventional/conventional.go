@@ -83,7 +83,6 @@ func ParseCommits(commits map[string]*github.RepositoryCommit) (parsed Commits) 
 	log.Logger = logger.Base()
 	cparser := Parser{parser.NewMachine(
 		conventionalcommits.WithTypes(conventionalcommits.TypesFreeForm),
-		conventionalcommits.WithBestEffort(),
 	)}
 	for _, commit := range commits {
 		message := Message{
