@@ -3,12 +3,12 @@ package version
 import (
 	"context"
 	"fmt"
+	"github.com/jakbytes/version_actions/internal/logger"
+	"github.com/jakbytes/version_actions/tools"
+	"github.com/jakbytes/version_actions/tools/github"
+	"github.com/jakbytes/version_actions/tools/github/composite"
 	"github.com/rs/zerolog/log"
 	"os"
-	"version_actions/internal/logger"
-	"version_actions/tools"
-	"version_actions/tools/github"
-	"version_actions/tools/github/composite"
 )
 
 var NewClient = github.NewClient

@@ -2,11 +2,11 @@ package conventional
 
 import (
 	"github.com/google/go-github/v58/github"
+	"github.com/jakbytes/version_actions/internal/logger"
 	"github.com/leodido/go-conventionalcommits"
 	"github.com/leodido/go-conventionalcommits/parser"
 	"github.com/rs/zerolog/log"
 	"sort"
-	"version_actions/internal/logger"
 )
 
 // Increment is a type that represents the type of increment to make to the version.

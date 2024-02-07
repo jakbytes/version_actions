@@ -2,8 +2,8 @@ package github
 
 import (
 	"github.com/google/go-github/v58/github"
+	"github.com/jakbytes/version_actions/tools/semver"
 	"github.com/rs/zerolog/log"
-	"version_actions/tools/semver"
 )
 
 // Version is a struct that contains the semantic version and the GitHub RepositoryTag associated with it.

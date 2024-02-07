@@ -2,15 +2,15 @@ package changelog
 
 import (
 	"bufio"
+	"github.com/jakbytes/version_actions/internal/logger"
+	"github.com/jakbytes/version_actions/internal/utility"
+	"github.com/jakbytes/version_actions/tools/conventional"
+	"github.com/jakbytes/version_actions/tools/semver"
 	"github.com/rs/zerolog/log"
 	"os"
 	"strings"
 	"testing"
 	"time"
-	"version_actions/internal/logger"
-	"version_actions/internal/utility"
-	"version_actions/tools/conventional"
-	"version_actions/tools/semver"
 
 	"github.com/google/go-github/v58/github"
 	"github.com/stretchr/testify/assert"

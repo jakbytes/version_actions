@@ -3,10 +3,10 @@ package github
 import (
 	"context"
 	"fmt"
+	"github.com/jakbytes/version_actions/internal/mocks"
+	"github.com/jakbytes/version_actions/tools/changelog"
 	"strings"
 	"testing"
-	"version_actions/internal/mocks"
-	"version_actions/tools/changelog"
 
 	"github.com/google/go-github/v58/github"
 	"github.com/stretchr/testify/assert"

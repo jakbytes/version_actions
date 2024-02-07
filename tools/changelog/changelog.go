@@ -5,13 +5,13 @@ import (
 	"errors"
 	"fmt"
 	"github.com/google/go-github/v58/github"
+	"github.com/jakbytes/version_actions/internal/utility"
+	"github.com/jakbytes/version_actions/tools/conventional"
+	"github.com/jakbytes/version_actions/tools/semver"
 	"io/fs"
 	"os"
 	"strings"
 	"time"
-	"version_actions/internal/utility"
-	"version_actions/tools/conventional"
-	"version_actions/tools/semver"
 )
 
 type Markdown []string
