@@ -1,6 +1,18 @@
 # Changelog
 
----
+## [v0.2.0-drc.0](https://github.com/jakbytes/version_actions/compare/v0.1.0...v0.2.0-drc.0) (2024-02-07)
+### Features
+
+- ([`c2a4629`](https://github.com/jakbytes/version_actions/commit/c2a4629dd8aadaafd8b577cf3738a8ec4eb34624)) clean up prs markdown
+- ([`3154777`](https://github.com/jakbytes/version_actions/commit/3154777b22d84f248a31abf98695727df4d84b8e)) body and footer of the commit will end up in the changelog as a subsection
+
+### Fixes
+
+- ([`70d030b`](https://github.com/jakbytes/version_actions/commit/70d030b01e8d9672076b8017cd10d6d75b001986)) multiline commit handling fixed
+- ([`d7ce0b8`](https://github.com/jakbytes/version_actions/commit/d7ce0b88ef4d3c296f7db91d6ec5c14af2233c2b)) resolve issue where existing changelog versions were dropped
+  > 
+  > The conditional logic for skiping existing lines did not correctly identify when to stop skipping lines for the next version.
+- ([`24b21c0`](https://github.com/jakbytes/version_actions/commit/24b21c024993d337061c3ee53f3d179f11293ecb)) prerelease_identifier action input should be version and optional
 
 ## [v0.1.0-src.0](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.1.0-src.0) (2024-02-07)
 ### Features
