@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.1.1-drc.1](https://github.com/jakbytes/version_actions/compare/v0.1.0...v0.1.1-drc.1) (2024-02-07)
+## [v0.1.1-src.1](https://github.com/jakbytes/version_actions/compare/v0.1.0...v0.1.1-src.1) (2024-02-07)
 ### Fixes
 
 - ([`efc4e6e`](https://github.com/jakbytes/version_actions/commit/efc4e6ee9c1115e471a8653b6306b91404cac2b3)) correct the module name for imports
