@@ -41,7 +41,7 @@ func GenerateNewChangelog(org, repo string, previousVersion, version *semver.Ver
 	body = append(body, generateVersionHeader(org, repo, previousVersion, version, disableVersionHeader))
 
 	sections := []Section{
-		{"Breaking Changes", commits.Breaking},
+		{"⚠ BREAKING CHANGES", commits.Breaking},
 		{"Features", commits.Feat},
 		{"Fixes", commits.Fix},
 		{"Documentation", commits.Docs},
