@@ -2,7 +2,7 @@
 
 ---
 
-## [v0.0.0] Initial Version _2024-02-07 02:40 UTC_
+## [v0.0.0] Initial Version _2024-02-07 02:47 UTC_
 ### Features
 
 - ([`c0d1dcd`](https://github.com/jakbytes/version_actions/commit/c0d1dcd0e3483390d8d7405569bcf3eadcce5710)) initial supported actions, version, sync, pull_request, extract_commit, download_release_asset
@@ -22,5 +22,6 @@
 
 ### CI/CD
 
+- ([`a48f0ae`](https://github.com/jakbytes/version_actions/commit/a48f0aeac3a5c4ce3bed5af4e055bff7174bd99f)) fix reference to type
 - ([`3b55e7f`](https://github.com/jakbytes/version_actions/commit/3b55e7fbce860c789836006c2c1e93ab3a1554ce)) actions need to reference the correct path
 - ([`ed5f7a3`](https://github.com/jakbytes/version_actions/commit/ed5f7a398dd060d3a9769c344206c2b86dad2959)) remove debugging action
