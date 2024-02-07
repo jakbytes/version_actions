@@ -2,11 +2,11 @@ package pull_request
 
 import (
 	"context"
+	"github.com/jakbytes/version_actions/internal/mocks"
+	"github.com/jakbytes/version_actions/tools/github"
 	"os"
 	"strings"
 	"testing"
-	"version_actions/internal/mocks"
-	"version_actions/tools/github"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

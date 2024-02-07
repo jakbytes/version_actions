@@ -1,7 +1,7 @@
 package conventional
 
 import (
-	"version_actions/tools/semver"
+	"github.com/jakbytes/version_actions/tools/semver"
 )
 
 // VersionConfig is a struct that contains the configuration for the versioning process

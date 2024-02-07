@@ -1,12 +1,12 @@
 package main
 
 import (
+	"github.com/jakbytes/version_actions/action/extract_commit"
+	"github.com/jakbytes/version_actions/action/pull_request"
+	"github.com/jakbytes/version_actions/action/version"
+	"github.com/jakbytes/version_actions/internal/logger"
 	"github.com/rs/zerolog/log"
 	"os"
-	"version_actions/action/extract_commit"
-	"version_actions/action/pull_request"
-	"version_actions/action/version"
-	"version_actions/internal/logger"
 )
 
 func main() {

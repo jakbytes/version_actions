@@ -3,12 +3,12 @@ package version
 import (
 	"context"
 	"fmt"
+	"github.com/jakbytes/version_actions/internal/mocks"
+	"github.com/jakbytes/version_actions/tools/github"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"os"
 	"testing"
-	"version_actions/internal/mocks"
-	"version_actions/tools/github"
 )
 
 func TestSetup(t *testing.T) {

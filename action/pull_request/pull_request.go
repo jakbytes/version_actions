@@ -4,13 +4,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/jakbytes/version_actions/internal/logger"
+	"github.com/jakbytes/version_actions/tools/changelog"
+	"github.com/jakbytes/version_actions/tools/conventional"
+	"github.com/jakbytes/version_actions/tools/github"
 	"github.com/rs/zerolog/log"
 	"os"
 	"strings"
-	"version_actions/internal/logger"
-	"version_actions/tools/changelog"
-	"version_actions/tools/conventional"
-	"version_actions/tools/github"
 )
 
 var NewClient = github.NewClient

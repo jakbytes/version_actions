@@ -1,4 +1,4 @@
-module version_actions
+module github.com/jakbytes/version_actions
 
 go 1.21.5
 
