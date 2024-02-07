@@ -116,6 +116,10 @@ func (h *Handler) head() *github.Branch {
 //   - else: ":robot: I have created a release *beep* *boop*"
 func (h *Handler) PullRequest() error {
 	h.gatherVersions()
+	if h.Commits().Increment() == -1 {
+		log.Info().Msg("No version increment necessary")
+		return nil
+	}
 	h.gatherChangelog()
 	h.composePullRequest()
 
