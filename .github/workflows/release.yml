@@ -120,7 +120,7 @@ jobs:
           cat release.txt
 
       - name: Release Version
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1.15
         with:
           token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}
           tag_name: ${{ needs.version.outputs.version }}
@@ -132,7 +132,7 @@ jobs:
 
       - name: Release Internal
         if: github.ref_name == 'staging'
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1.15
         with:
           token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}
           body_path: release.txt

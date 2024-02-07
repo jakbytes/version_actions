@@ -3,7 +3,6 @@ package github
 import (
 	"context"
 	"github.com/google/go-github/v58/github"
-	"github.com/rs/zerolog/log"
 	"strings"
 )
 
@@ -30,8 +29,6 @@ type Repository struct {
 }
 
 func (r *Repository) getBranch(name string) (*github.Branch, error) {
-	log.Debug().Msgf("owner: %s", r.RepositoryMetadata.Owner)
-	log.Debug().Msgf("name: %s", r.RepositoryMetadata.Name)
 	branch, _, err := r.GetBranch(r.Ctx, r.RepositoryMetadata.Owner, r.RepositoryMetadata.Name, name, 2)
 	if err != nil && strings.Contains(err.Error(), "404") {
 		return nil, BranchNotFound{Name: name}
@@ -80,6 +77,5 @@ func (r *Repository) CreateBranch(name string, sha *string) (branch *Branch, err
 	if err != nil {
 		return nil, err
 	}
-	log.Debug().Msgf("Created branch: %s", name)
 	return r.Branch(name)
 }

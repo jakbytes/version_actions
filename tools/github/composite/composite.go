@@ -114,14 +114,6 @@ func (h *Handler) head() *github.Branch {
 //   - if prerelease: ":robot: I have created a release candidate *beep* *boop*"
 //   - else: ":robot: I have created a release *beep* *boop*"
 func (h *Handler) PullRequest() error {
-	log.Debug().Msgf("owner: %s", h.Owner)
-	log.Debug().Msgf("name: %s", h.Name)
-	log.Debug().Msgf("head: %s", h.Head)
-	log.Debug().Msgf("base: %s", h.Base)
-	log.Debug().Msgf("prereleaseIdentifier: %s", h.PrereleaseIdentifier)
-	log.Debug().Msgf("releaseBranch: %s", h.ReleaseBranch)
-	log.Debug().Msgf("base(): %s", h.base().Name)
-	log.Debug().Msgf("head(): %s", h.head().Name)
 	h.gatherVersions()
 	h.gatherChangelog()
 	h.composePullRequest()
@@ -206,18 +198,16 @@ func (h *Handler) gatherChangelog() {
 
 func (h *Handler) composePullRequest() {
 	h.title = fmt.Sprintf("release(%s): v%s", h.Base, h.NextVersion().String())
-	header := ":robot: I have created a release candidate *beep* *boop*"
+	header := "### :robot: I have created a release candidate *beep* *boop*"
 	if h.Base == h.ReleaseBranch { // if the release branch is the target, we're promoting a release candidate to a release
-		header = ":robot: I have created a release *beep* *boop*"
+		header = "### :robot: I have created a release *beep* *boop*"
 	}
 
 	h.body = append([]string{header,
 		"",
-		"---",
-		"",
 	}, h.latestChangelog...)
 	// footer
-	h.body = append(h.body, "---", "",
+	h.body = append(h.body, "#", "",
 		"This release was composed by [version_actions](https://github.com/jakbytes/version_actions)")
 }
 
