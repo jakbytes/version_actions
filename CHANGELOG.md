@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.0.1-src.1](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.0.1-src.1) (2024-02-07)
+### Fixes
+
+- ([`ffa1d53`](https://github.com/jakbytes/version_actions/commit/ffa1d5370ba7bfd933ace9954b0fd369021a9665)) no increment should not generate a PR
+
+### CI/CD
+
+- ([`2c3acd9`](https://github.com/jakbytes/version_actions/commit/2c3acd9472dc067d35a29990f122a71e4fad0372)) softprops/action-gh-release pinned to sha with node20
+
 ## [v0.0.0] Initial Version (2024-02-07)
 ### Features
 
@@ -39,13 +48,3 @@
 - ([`a48f0ae`](https://github.com/jakbytes/version_actions/commit/a48f0aeac3a5c4ce3bed5af4e055bff7174bd99f)) fix reference to type
 - ([`3b55e7f`](https://github.com/jakbytes/version_actions/commit/3b55e7fbce860c789836006c2c1e93ab3a1554ce)) actions need to reference the correct path
 - ([`ed5f7a3`](https://github.com/jakbytes/version_actions/commit/ed5f7a398dd060d3a9769c344206c2b86dad2959)) remove debugging action
-
-## [v0.0.1](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.0.1) (2024-02-07)
-### Fixes
-
-- ([`0355658`](https://github.com/jakbytes/version_actions/commit/03556582d5a46e64452c945454d95e2ddc1a4784)) observing
-- ([`93297c1`](https://github.com/jakbytes/version_actions/commit/93297c169c9ce8aabf9f0df7292e2e04a6296070)) observing
-
-### CI/CD
-
-- ([`09744c1`](https://github.com/jakbytes/version_actions/commit/09744c1d845d1c9c26d9831595a27c26f4bacc38)) tweak pull_request to properly handle dev branches

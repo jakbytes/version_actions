@@ -71,6 +71,7 @@ func (h *Handler) Commits() (commits *conventional.Commits) {
 		var sha *string
 		if h.Latest != nil {
 			sha = h.Latest.Commit.SHA
+			log.Debug().Msgf("Getting commits since %s", *sha)
 		}
 		raw, err := h.head().GetCommitsSinceCommit(sha)
 		if err != nil {
@@ -115,6 +116,10 @@ func (h *Handler) head() *github.Branch {
 //   - else: ":robot: I have created a release *beep* *boop*"
 func (h *Handler) PullRequest() error {
 	h.gatherVersions()
+	if h.Commits().Increment() == -1 {
+		log.Info().Msg("No version increment necessary")
+		return nil
+	}
 	h.gatherChangelog()
 	h.composePullRequest()
 
@@ -212,10 +217,12 @@ func (h *Handler) composePullRequest() {
 }
 
 func (h *Handler) VersionInfo() (info conventional.VersionInfo) {
-	if h.Latest != nil {
+	if h.Latest != nil && h.Latest.Version != nil {
+		log.Info().Msgf("Latest version: %s", h.Latest.Version.String())
 		info.CurrentVersion = h.Latest.Version
 	}
-	if h.LatestPrerelease != nil {
+	if h.LatestPrerelease != nil && h.LatestPrerelease.Version != nil {
+		log.Info().Msgf("Latest prerelease: %s", h.LatestPrerelease.Version.String())
 		info.CurrentReleaseCandidate = h.LatestPrerelease.Version
 	}
 	return
