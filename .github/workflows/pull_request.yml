@@ -3,9 +3,9 @@ name: Automatic Pull Request
 on:
   push:
     branches:
-      - '**/feature/**'
-      - '**/fix/**'
-      - '**/hotfix/**'
+      - 'dev/feature/**'
+      - 'dev/fix/**'
+      - 'stg/hotfix/**'
 jobs:
   test:
     name: Test
@@ -42,12 +42,13 @@ jobs:
           git config --global user.email "git.automations.bot@gmail.com"
           git config --global user.name "automations-bot"
           
-      - name: Set Environment Variables
+      - name: Extract Prefix from Branch Name
         run: |
-          if [ "${{ github.ref_name }}" == "development" ]; then
+          PREFIX=$(echo "${{ github.ref_name }}" | cut -d'/' -f1)
+          if [ "$PREFIX" == "dev" ]; then
+            echo "BASE_BRANCH=development" >> $GITHUB_ENV
+          elif [ "$PREFIX" == "stg" ]; then
             echo "BASE_BRANCH=staging" >> $GITHUB_ENV
-          elif [ "${{ github.ref_name }}" == "staging" ]; then
-            echo "BASE_BRANCH=main" >> $GITHUB_ENV
           else
             echo "BASE_BRANCH=none" >> $GITHUB_ENV
           fi
