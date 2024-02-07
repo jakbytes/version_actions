@@ -1,7 +1,6 @@
 # Changelog
 
-## [v0.1.0](https://github.com/jakbytes/version_actions/compare/v0.1.0...v0.1.0) (2024-02-07)
-## [v0.2.0-src.0](https://github.com/jakbytes/version_actions/compare/v0.1.0...v0.2.0-src.0) (2024-02-07)
+## [v0.0.0] Initial Version (2024-02-07)
 ### Features
 
 - ([`38f1bd1`](https://github.com/jakbytes/version_actions/commit/38f1bd1091e162416bbcc653da5865b8f70e2c49)) breaking changes text capitalized to call it out strongly:
@@ -28,9 +27,21 @@
 - ([`3b55e7f`](https://github.com/jakbytes/version_actions/commit/3b55e7fbce860c789836006c2c1e93ab3a1554ce)) actions need to reference the correct path
 - ([`ed5f7a3`](https://github.com/jakbytes/version_actions/commit/ed5f7a398dd060d3a9769c344206c2b86dad2959)) remove debugging action
 
-## [v0.0.0] Initial Version (2024-02-07)
+## [v0.2.0-drc.0](https://github.com/jakbytes/version_actions/compare/v0.1.0...v0.2.0-drc.0) (2024-02-07)
 ### Features
 
+- ([`c2a4629`](https://github.com/jakbytes/version_actions/commit/c2a4629dd8aadaafd8b577cf3738a8ec4eb34624)) clean up prs markdown
+- ([`3154777`](https://github.com/jakbytes/version_actions/commit/3154777b22d84f248a31abf98695727df4d84b8e)) body and footer of the commit will end up in the changelog as a subsection
+
+### Fixes
+
+- ([`70d030b`](https://github.com/jakbytes/version_actions/commit/70d030b01e8d9672076b8017cd10d6d75b001986)) multiline commit handling fixed
+- ([`d7ce0b8`](https://github.com/jakbytes/version_actions/commit/d7ce0b88ef4d3c296f7db91d6ec5c14af2233c2b)) resolve issue where existing changelog versions were dropped
+  > 
+  > The conditional logic for skiping existing lines did not correctly identify when to stop skipping lines for the next version.
+- ([`24b21c0`](https://github.com/jakbytes/version_actions/commit/24b21c024993d337061c3ee53f3d179f11293ecb)) prerelease_identifier action input should be version and optional
+
+## [v0.1.0-src.0](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.1.0-src.0) (2024-02-07)
 - ([`c0d1dcd`](https://github.com/jakbytes/version_actions/commit/c0d1dcd0e3483390d8d7405569bcf3eadcce5710)) initial supported actions, version, sync, pull_request, extract_commit, download_release_asset
 
 ### Fixes
