@@ -193,7 +193,7 @@ jobs:
           base: development
 
       - name: Sync Staging
-        uses: jakbytes/version_actions/sync@internal
+        uses: jakbytes/version_actions/action/sync@internal
         if: github.ref_name == 'main'
         with:
           token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}

@@ -38,7 +38,7 @@ runs:
     - name: Download Action
       env:
         VERSION: ${{ github.action_ref }}
-      uses: jakbytes/version_actions/download_release_asset@internal
+      uses: jakbytes/version_actions/action/download_release_asset@internal
       with:
         repository_owner: 'jakbytes'
         repository_name: 'version_actions'
@@ -49,7 +49,7 @@ runs:
     - name: Extract Commit
       id: commit
       if: ${{ inputs.trigger }} != 'none'
-      uses: jakbytes/version_actions/extract_commit@internal
+      uses: jakbytes/version_actions/action/extract_commit@internal
 
     - name: Run Action
       id: version
