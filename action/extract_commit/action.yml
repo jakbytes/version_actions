@@ -40,4 +40,4 @@ runs:
       id: extract_commit
       shell: bash
       run: |
-        ./action extract_commit ${{ github.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }}
+        ./version_action extract_commit ${{ github.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }}

@@ -27,4 +27,4 @@ runs:
     - name: Run Action
       shell: bash
       run: |
-        ./action pull_request ${{ inputs.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }} ${{ inputs.base }}
+        ./version_action pull_request ${{ inputs.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }} ${{ inputs.base }}
