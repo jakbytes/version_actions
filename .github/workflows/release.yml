@@ -176,7 +176,7 @@ jobs:
     if: github.ref_name != 'development'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}
           fetch-depth: 0 # Fetch all history for all branches and tags
