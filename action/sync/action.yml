@@ -1,0 +1,47 @@
+name: 'Automated Sync Action'
+description: 'Automatically synchronizes or creates a pull request to sync changes from one branch to another'
+inputs:
+  token:
+    description: 'GitHub token for creating and updating pull requests'
+    required: true
+  base:
+    description: 'The base branch to merge into'
+    required: true
+outputs:
+  version:
+    description: 'The next version number'
+    value: ${{ steps.version.outputs.version }}
+  action:
+    description: 'The action trigger extracted from the commit message'
+    value: ${{ steps.check_trigger.outputs.action }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Merge or Create PR
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+      shell: bash
+      run: |
+        git checkout ${{ inputs.base }}
+        if ! git merge ${{ github.ref_name }} --no-ff -m "sync(${{ inputs.base }}): merge ${{ github.ref_name }} into ${{ inputs.base }}"; then
+          echo "Merge failed, creating a pull request instead."
+
+          gh auth login --with-token <<< "$GITHUB_TOKEN"
+
+          # Create a unique branch name based on the current timestamp
+          BRANCH_NAME="sync--branch--${{ inputs.base }}--$(date +%s)"
+
+          # Checkout to a new branch from main
+          git checkout -b "$BRANCH_NAME"
+
+          # Push the new branch to remote
+          git push origin "$BRANCH_NAME"
+
+          # Create a pull request from this new branch to ${{ inputs.base }}
+          gh pr create --base ${{inputs.base}} --head "$BRANCH_NAME" \
+                       --title "sync(${{ inputs.base }}): merge ${{ github.ref_name }} into ${{ inputs.base }}" \
+                       --body "Automatic PR to sync changes from ${{ github.ref_name }} to ${{ inputs.base }}. Merge conflicts were detected and the merge must be done manually."
+        else
+          echo "Merge successful, pushing changes."
+          git push origin ${{ inputs.base }} --force-with-lease
+        fi

@@ -1,0 +1,62 @@
+name: Dispatch Manual Build and Release
+
+on:
+  workflow_dispatch:
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}
+
+      - name: Configure Git for GitHub Actions
+        run: |
+          git config --global user.email "git.automations.bot@gmail.com"
+          git config --global user.name "automations-bot"
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.21.6
+
+      - name: Build
+        run: |
+          go build version_action.go
+          chmod +x version_action
+
+      - name: Tag
+        run: |
+          # Check if the tag 'internal' already exists
+          if git tag --list | grep -qx 'internal'; then
+              echo "Tag 'internal' already exists. Moving the tag."
+              git tag -d internal
+              git push origin :refs/tags/internal
+          fi
+          
+          # Create a new tag 'internal'
+          git tag -a internal -m "Internal release"
+          
+          # Push the tag to remote
+          git push origin internal --force 
+          
+          # Write release notes to file with note that this is a manual release
+          echo "## Manual release" > release.txt
+          echo "" >> release.txt
+          echo "This release was triggered manually." >> release.txt
+
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}
+          body_path: release.txt
+          tag_name: internal
+          files: |
+            version_action
+            LICENSE
+    
+        
