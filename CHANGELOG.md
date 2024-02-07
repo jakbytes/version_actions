@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.0.0-drc.1] Initial Version (2024-02-07)
+## [v0.0.0-src.0] Initial Version (2024-02-07)
 ### Features
 
 - ([`3fb5621`](https://github.com/jakbytes/version_actions/commit/3fb562193137e64068da04b1dbb9d3c69b4fc5b3)) initial actions, version, sync, pr, extract_commit, download_release_asset, prerelease
