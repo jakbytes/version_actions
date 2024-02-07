@@ -41,7 +41,7 @@ func GenerateNewChangelog(org, repo string, previousVersion, version *semver.Ver
 	body = append(body, generateVersionHeader(org, repo, previousVersion, version, disableVersionHeader))
 
 	sections := []Section{
-		{"Breaking Changes", commits.Breaking},
+		{"⚠ BREAKING CHANGES", commits.Breaking},
 		{"Features", commits.Feat},
 		{"Fixes", commits.Fix},
 		{"Documentation", commits.Docs},
@@ -67,7 +67,7 @@ func GenerateNewChangelog(org, repo string, previousVersion, version *semver.Ver
 }
 
 func generateVersionHeader(org, repo string, previousVersion, version *semver.Version, disableVersionHeader bool) string {
-	currentDate := time.Now().UTC().Format("2006-01-02 15:04") + " UTC"
+	currentDate := time.Now().UTC().Format("2006-01-02")
 
 	if disableVersionHeader {
 		return "## Changelog"
@@ -75,7 +75,7 @@ func generateVersionHeader(org, repo string, previousVersion, version *semver.Ve
 		// Header for the version with GitHub compare link
 		return fmt.Sprintf("## [v%s](https://github.com/%s/%s/compare/v%s...v%s) _%s_", version, org, repo, previousVersion, version, currentDate)
 	} else {
-		return fmt.Sprintf("## [v%s] Initial Version _%s_", version, currentDate)
+		return fmt.Sprintf("## [v%s] Initial Version (%s)", version, currentDate)
 	}
 }
 

@@ -1,0 +1,33 @@
+name: 'Extract Prerelease Identifier'
+description: 'Extracts the prerelease identifier from the version or release tag name.'
+inputs:
+  token:
+    description: 'GitHub token for creating and updating pull requests'
+    required: true
+  base:
+    description: 'The base branch to open the pull request against'
+    required: true
+outputs:
+  identifier:
+    description: 'The prerelease identifier (e.g. for v1.0.0-rc.1 it would be rc)'
+    value: ${{ steps.extract_prerelease_identifier.outputs.identifier }}
+  sequence:
+    description: 'The sequence number of the prerelease identifier (e.g. for v1.0.0-rc.1 it would be 1)'
+    value: ${{ steps.prerelease_identifier.outputs.sequence }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Extract Environment Identifier
+      id: prerelease_identifier
+      shell: bash
+      run: |
+        VERSION_INPUT=${{ github.event.inputs.version || github.event.release.tag_name }}
+        if [[ "$VERSION_INPUT" =~ -(.*[a-zA-Z]+)\.([0-9]+) ]]; then
+          PRERELEASE_IDENTIFIER=${BASH_REMATCH[1]}
+          SEQUENCE_NUMBER=${BASH_REMATCH[2]}
+        else
+          PRERELEASE_IDENTIFIER=""
+          SEQUENCE_NUMBER=""
+        fi
+        echo "identifier=$PRERELEASE_IDENTIFIER" >> $GITHUB_OUTPUT
+        echo "sequence=$SEQUENCE_NUMBER" >> $GITHUB_OUTPUT
