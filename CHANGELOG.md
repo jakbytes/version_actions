@@ -2,7 +2,7 @@
 
 ---
 
-## [v0.1.0-src.0](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.1.0-src.0) _2024-02-07 03:24 UTC_
+## [v0.1.0](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.1.0) _2024-02-07 03:28 UTC_
 ### Features
 
 - ([`38f1bd1`](https://github.com/jakbytes/version_actions/commit/38f1bd1091e162416bbcc653da5865b8f70e2c49)) breaking changes text capitalized to call it out strongly
