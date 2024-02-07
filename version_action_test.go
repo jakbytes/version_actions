@@ -2,17 +2,17 @@ package main
 
 import (
 	"context"
+	"github.com/jakbytes/version_actions/action/pull_request"
+	"github.com/jakbytes/version_actions/action/version"
+	"github.com/jakbytes/version_actions/internal/mocks"
+	"github.com/jakbytes/version_actions/tools/changelog"
+	"github.com/jakbytes/version_actions/tools/github"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"os"
 	"strings"
 	"testing"
 	"time"
-	"version_actions/action/pull_request"
-	"version_actions/action/version"
-	"version_actions/internal/mocks"
-	"version_actions/tools/changelog"
-	"version_actions/tools/github"
 )
 
 var repositories = &mocks.RepositoryService{}

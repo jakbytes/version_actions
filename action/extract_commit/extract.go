@@ -3,13 +3,13 @@ package extract_commit
 import (
 	"context"
 	"fmt"
+	"github.com/jakbytes/version_actions/tools"
+	"github.com/jakbytes/version_actions/tools/conventional"
+	"github.com/jakbytes/version_actions/tools/github"
 	"github.com/leodido/go-conventionalcommits"
 	cparser "github.com/leodido/go-conventionalcommits/parser"
 	"os"
 	"strings"
-	"version_actions/tools"
-	"version_actions/tools/conventional"
-	"version_actions/tools/github"
 )
 
 var MaxDepth = 10

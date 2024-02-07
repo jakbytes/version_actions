@@ -3,14 +3,14 @@ package composite
 import (
 	"errors"
 	"fmt"
+	"github.com/jakbytes/version_actions/internal/utility"
+	"github.com/jakbytes/version_actions/tools/changelog"
+	"github.com/jakbytes/version_actions/tools/conventional"
+	"github.com/jakbytes/version_actions/tools/github"
+	"github.com/jakbytes/version_actions/tools/semver"
 	"github.com/rs/zerolog/log"
 	"io"
 	"os"
-	"version_actions/internal/utility"
-	"version_actions/tools/changelog"
-	"version_actions/tools/conventional"
-	"version_actions/tools/github"
-	"version_actions/tools/semver"
 )
 
 type Handler struct {

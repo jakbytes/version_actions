@@ -2,8 +2,8 @@ package tools
 
 import (
 	"fmt"
+	"github.com/jakbytes/version_actions/internal/utility"
 	"os"
-	"version_actions/internal/utility"
 )
 
 func String(input string) *string {

@@ -3,9 +3,9 @@ package github
 import (
 	"context"
 	"github.com/google/go-github/v58/github"
+	"github.com/jakbytes/version_actions/internal/logger"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/oauth2"
-	"version_actions/internal/logger"
 )
 
 type RepositoryCommit = github.RepositoryCommit

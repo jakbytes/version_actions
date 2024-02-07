@@ -3,8 +3,8 @@ package github
 import (
 	"context"
 	"errors"
+	"github.com/jakbytes/version_actions/internal/mocks"
 	"testing"
-	"version_actions/internal/mocks"
 
 	"github.com/google/go-github/v58/github"
 	"github.com/stretchr/testify/require"

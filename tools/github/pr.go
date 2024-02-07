@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/google/go-github/v58/github"
-	"version_actions/tools/changelog"
+	"github.com/jakbytes/version_actions/tools/changelog"
 )
 
 // PullRequestsService is an interface abstracting operations supported by go-github's github.PullRequestsService

@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.1.1-src.1](https://github.com/jakbytes/version_actions/compare/v0.1.0...v0.1.1-src.1) (2024-02-07)
+### Fixes
+
+- ([`efc4e6e`](https://github.com/jakbytes/version_actions/commit/efc4e6ee9c1115e471a8653b6306b91404cac2b3)) correct the module name for imports
+
+### CI/CD
+
+- ([`176d7c3`](https://github.com/jakbytes/version_actions/commit/176d7c347e2632069d3cd84fa848880de86e78a9)) add testing to pull requests for better code coverage
+
 ## [v0.1.0](https://github.com/jakbytes/version_actions/compare/v0.0.1...v0.1.0) (2024-02-07)
 ### Features
 

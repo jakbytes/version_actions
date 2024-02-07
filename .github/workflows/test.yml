@@ -1,0 +1,48 @@
+name: Lint and Test
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: runner / golangci-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: golangci-lint
+        uses: reviewdog/action-golangci-lint@v2
+        env:
+          CGO_CFLAGS_ALLOW: ".*"
+          CGO_LDFLAGS_ALLOW: ".*"
+        with:
+          tool_name: golangci
+          go_version: 1.21.x
+          golangci_lint_version: v1.45.2
+          golangci_lint_flags: --timeout 5m
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.21.6
+
+      - name: Test
+        run: |
+          go test -v ./... -coverprofile=coverage.out
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

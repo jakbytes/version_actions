@@ -3,9 +3,9 @@ package conventional
 import (
 	"errors"
 	"fmt"
+	"github.com/jakbytes/version_actions/tools/semver"
 	"strconv"
 	"testing"
-	"version_actions/tools/semver"
 
 	"github.com/stretchr/testify/require"
 )
