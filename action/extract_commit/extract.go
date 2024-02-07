@@ -24,7 +24,7 @@ func ExtractCommit() {
 	client := github.NewClient(context.Background(), token, owner, name)
 
 	parser := conventional.Parser{Machine: cparser.NewMachine(
-		conventionalcommits.WithTypes(conventionalcommits.TypesConventional),
+		conventionalcommits.WithTypes(conventionalcommits.TypesFreeForm),
 		conventionalcommits.WithBestEffort(),
 	)}
 

@@ -82,7 +82,7 @@ func (c *Commits) Increment() Increment {
 func ParseCommits(commits map[string]*github.RepositoryCommit) (parsed Commits) {
 	log.Logger = logger.Base()
 	cparser := Parser{parser.NewMachine(
-		conventionalcommits.WithTypes(conventionalcommits.TypesConventional),
+		conventionalcommits.WithTypes(conventionalcommits.TypesFreeForm),
 		conventionalcommits.WithBestEffort(),
 	)}
 	for _, commit := range commits {
