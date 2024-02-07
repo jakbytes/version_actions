@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.0.1-src.2](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.0.1-src.2) (2024-02-07)
+## [v0.0.1](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.0.1) (2024-02-07)
 ### Fixes
 
 - ([`0355658`](https://github.com/jakbytes/version_actions/commit/03556582d5a46e64452c945454d95e2ddc1a4784)) observing
