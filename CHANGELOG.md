@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.0.1-src.1](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.0.1-src.1) (2024-02-07)
+## [v0.0.1](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.0.1) (2024-02-07)
 ### Fixes
 
 - ([`ffa1d53`](https://github.com/jakbytes/version_actions/commit/ffa1d5370ba7bfd933ace9954b0fd369021a9665)) no increment should not generate a PR
