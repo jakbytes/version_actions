@@ -26,6 +26,9 @@ outputs:
   version:
     description: 'The next version number'
     value: ${{ steps.version.outputs.version }}
+  type:
+    description: 'The type of the last valid conventional commit'
+    value: ${{ steps.commit.outputs.type }}
 runs:
   using: 'composite'
   steps:
