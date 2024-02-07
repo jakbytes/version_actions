@@ -83,7 +83,7 @@ func version() {
 	}
 
 	tools.OpenOutput(func(out tools.Output) {
-		out.Set("version", github.String(h.NextVersion().String()))
+		out.Set("version", github.String("v"+h.NextVersion().String()))
 	})
 }
 
