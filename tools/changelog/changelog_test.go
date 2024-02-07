@@ -37,6 +37,7 @@ func TestGenerateVersionHeader(t *testing.T) {
 }
 
 func TestFormatCommit(t *testing.T) {
+	log.Logger = logger.Base()
 	// Mock commit data
 	date := time.Date(2021, 10, 1, 12, 0, 0, 0, time.UTC)
 	commit := &github.RepositoryCommit{
@@ -57,6 +58,49 @@ func TestFormatCommit(t *testing.T) {
 	// Running the test with assert
 	result := formatCommit("org", "repo", commit)
 	assert.Equal(t, Markdown(strings.Split(expected, "\n")), result, "formatCommit should format the commit correctly")
+
+	commit = &github.RepositoryCommit{
+		Commit: &github.Commit{
+			Message: github.String(strings.Join([]string{"feat(development): a solid description",
+				"",
+				"a ton more detail to really understand what's going on",
+				"",
+				"Introduce a request id and a reference to latest request. Dismiss",
+				"incoming responses other than from latest request.",
+				"",
+				"Remove timeouts which were used to mitigate the racing issue but are",
+				"obsolete now.",
+				"",
+				"BREAKING CHANGE: use JavaScript features not available in Node 6."}, "\n")),
+			Committer: &github.CommitAuthor{
+				Date: &github.Timestamp{Time: date},
+				Name: github.String("John Doe"),
+			},
+		},
+		SHA:    github.String("1234567890abcdef"),
+		Author: &github.User{Login: github.String("johndoe")},
+	}
+
+	// Expected format
+	e := Markdown{
+		"- ([`1234567`](https://github.com/org/repo/commit/1234567890abcdef)) a solid description",
+		"  > ",
+		"  > a ton more detail to really understand what's going on",
+		"  > ",
+		"  > Introduce a request id and a reference to latest request. Dismiss",
+		"  > incoming responses other than from latest request.",
+		"  > ",
+		"  > Remove timeouts which were used to mitigate the racing issue but are",
+		"  > obsolete now.",
+		"  > ",
+		"  > BREAKING CHANGE: use JavaScript features not available in Node 6.",
+	}
+
+	// Running the test with assert
+	result = formatCommit("org", "repo", commit)
+	for i, line := range e {
+		assert.Equal(t, line, result[i])
+	}
 }
 
 // Sample mock commit function

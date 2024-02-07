@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/google/go-github/v58/github"
+	"github.com/rs/zerolog/log"
 	"io/fs"
 	"os"
 	"strings"
@@ -81,7 +82,7 @@ func generateVersionHeader(org, repo string, previousVersion, version *semver.Ve
 
 func formatCommit(org, repo string, commit *github.RepositoryCommit) Markdown {
 	// Extracting the first line of the commit message
-	message := strings.TrimSpace(strings.Split(*commit.Commit.Message, ":")[1])
+	message := strings.TrimSpace(strings.SplitN(strings.TrimSpace(*commit.Commit.Message), ":", 2)[1])
 	messageParts := strings.Split(message, "\n")
 	// Extracting a short commit hash
 	shortSHA := (*commit.SHA)[:7]
@@ -91,13 +92,16 @@ func formatCommit(org, repo string, commit *github.RepositoryCommit) Markdown {
 	}
 
 	for _, line := range messageParts[1:] {
+		log.Debug().Msg(fmt.Sprintf("  > %s", line))
 		m = append(m, fmt.Sprintf("  > %s", line))
 	}
 
 	// Creating the Markdown formatted string
-	return Markdown{
-		fmt.Sprintf("- ([`%s`](https://github.com/%s/%s/commit/%s)) %s", shortSHA, org, repo, *commit.SHA, messageParts[0]),
+
+	for _, line := range m {
+		log.Debug().Msg(line)
 	}
+	return m
 }
 
 // Determines whether a line should be skipped.
