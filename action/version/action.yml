@@ -58,6 +58,9 @@ runs:
       env:
         ACTION_TRIGGER: ${{ inputs.trigger }} || ${{ steps.commit.outputs.type }}
       run: |
+        echo "----"
+        ls -al
+        echo "----"
         ./version_action version ${{ inputs.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }} ${{ inputs.base }} ${{ inputs.prerelease }} ${{ inputs.release_branch }} ${{ env.ACTION_TRIGGER }} ${{ inputs.commitFiles }}
 
     - uses: actions/upload-artifact@v4

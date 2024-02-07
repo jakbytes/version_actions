@@ -6,6 +6,7 @@ on:
       - main
       - staging
       - development
+      - jak/debugging
 jobs:
   test:
     name: Test

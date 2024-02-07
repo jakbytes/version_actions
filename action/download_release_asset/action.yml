@@ -41,3 +41,7 @@ runs:
             echo "File set as executable."
           fi
         fi
+        
+        echo "----"
+        ls -al
+        echo "----"
