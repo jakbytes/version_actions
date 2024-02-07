@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.0.0-drc.0] Initial Version (2024-02-07)
+## [v0.0.0-drc.1] Initial Version (2024-02-07)
 ### Features
 
 - ([`3fb5621`](https://github.com/jakbytes/version_actions/commit/3fb562193137e64068da04b1dbb9d3c69b4fc5b3)) initial actions, version, sync, pr, extract_commit, download_release_asset, prerelease
@@ -34,7 +34,6 @@
 - ([`a48f0ae`](https://github.com/jakbytes/version_actions/commit/a48f0aeac3a5c4ce3bed5af4e055bff7174bd99f)) fix reference to type
 - ([`3b55e7f`](https://github.com/jakbytes/version_actions/commit/3b55e7fbce860c789836006c2c1e93ab3a1554ce)) actions need to reference the correct path
 - ([`ed5f7a3`](https://github.com/jakbytes/version_actions/commit/ed5f7a398dd060d3a9769c344206c2b86dad2959)) remove debugging action
-
 
 ## [v0.2.0-drc.0](https://github.com/jakbytes/version_actions/compare/v0.1.0...v0.2.0-drc.0) (2024-02-07)
 ### Features
