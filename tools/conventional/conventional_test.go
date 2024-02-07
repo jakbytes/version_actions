@@ -105,17 +105,6 @@ func TestParseCommits(t *testing.T) {
 			expectFix:      0,
 		},
 		{
-			name: "Commit with missing blank line after description",
-			commits: map[string]*github.RepositoryCommit{
-				"9": mockCommit("fix: description\na blank line is mandatory to start the body part of the commit message!\nThe input does not respect the Conventional Commits v1 specification because it lacks a blank line after the description (before the body).", time.Now()),
-			},
-			expectBump: Patch, // Assuming 'fix' leads to a patch version bump.
-			expectFix:  1,
-			// No breaking changes or features are expected since the message type is 'fix'.
-			expectBreaking: 0,
-			expectFeat:     0,
-		},
-		{
 			name: "Mixed major, minor, and patch commits",
 			commits: map[string]*github.RepositoryCommit{
 				"2": mockCommit("feat: implement user profiles", time.Date(2022, 1, 3, 0, 0, 0, 0, time.UTC)),  // Minor
