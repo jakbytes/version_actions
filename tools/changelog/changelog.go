@@ -82,13 +82,21 @@ func generateVersionHeader(org, repo string, previousVersion, version *semver.Ve
 func formatCommit(org, repo string, commit *github.RepositoryCommit) Markdown {
 	// Extracting the first line of the commit message
 	message := strings.TrimSpace(strings.Split(*commit.Commit.Message, ":")[1])
-
+	messageParts := strings.Split(message, "\n")
 	// Extracting a short commit hash
 	shortSHA := (*commit.SHA)[:7]
 
+	m := Markdown{
+		fmt.Sprintf("- ([`%s`](https://github.com/%s/%s/commit/%s)) %s", shortSHA, org, repo, *commit.SHA, messageParts[0]),
+	}
+
+	for _, line := range messageParts[1:] {
+		m = append(m, fmt.Sprintf("  > %s", line))
+	}
+
 	// Creating the Markdown formatted string
 	return Markdown{
-		fmt.Sprintf("- ([`%s`](https://github.com/%s/%s/commit/%s)) %s", shortSHA, org, repo, *commit.SHA, message),
+		fmt.Sprintf("- ([`%s`](https://github.com/%s/%s/commit/%s)) %s", shortSHA, org, repo, *commit.SHA, messageParts[0]),
 	}
 }
 
