@@ -83,6 +83,7 @@ func version() {
 	}
 
 	tools.OpenOutput(func(out tools.Output) {
+		log.Debug().Msgf("Setting version to v%s", h.NextVersion().String())
 		out.Set("version", github.String("v"+h.NextVersion().String()))
 	})
 }
