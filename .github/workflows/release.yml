@@ -127,7 +127,7 @@ jobs:
           prerelease: ${{ github.ref_name != 'main' && 'true' || 'false' }}
           body_path: release.txt
           files: |
-            action
+            version_action
             LICENSE
 
       - name: Release Internal
@@ -139,7 +139,7 @@ jobs:
           prerelease: true
           tag_name: internal
           files: |
-            action
+            version_action
             LICENSE
   promote:
     name: Create Promote PR
