@@ -1,12 +1,9 @@
 name: 'Extract Prerelease Identifier'
 description: 'Extracts the prerelease identifier from the version or release tag name.'
 inputs:
-  token:
-    description: 'GitHub token for creating and updating pull requests'
-    required: true
-  base:
-    description: 'The base branch to open the pull request against'
-    required: true
+  version:
+    description: 'The version or release tag name to extract the prerelease identifier from'
+    required: false
 outputs:
   identifier:
     description: 'The prerelease identifier (e.g. for v1.0.0-rc.1 it would be rc)'
