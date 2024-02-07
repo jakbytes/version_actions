@@ -53,7 +53,7 @@ jobs:
           fi
 
       - name: Automated Pull Request
-        uses: jakbytes/version_actions/pull_request@internal
+        uses: jakbytes/version_actions/action/pull_request@internal
         if: env.BASE_BRANCH != 'none'
         with:
           token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}

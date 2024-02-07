@@ -54,7 +54,7 @@ jobs:
             echo "PRERELEASE_TAG=src" >> $GITHUB_ENV
           fi
       - name: Automated Release Pull Request
-        uses: jakbytes/version_actions/version@internal
+        uses: jakbytes/version_actions/action/version@internal
         id: version
         with:
           token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}
@@ -162,7 +162,7 @@ jobs:
             echo "BASE_BRANCH=none" >> $GITHUB_ENV
           fi
       - name: Automated Release Pull Request
-        uses: jakbytes/version_actions/version@internal
+        uses: jakbytes/version_actions/action/version@internal
         id: version
         with:
           token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}
@@ -187,7 +187,7 @@ jobs:
           git config --global user.name "automations-bot"
 
       - name: Sync Development
-        uses: jakbytes/version_actions/sync@internal
+        uses: jakbytes/version_actions/action/sync@internal
         with:
           token: ${{ secrets.AUTOMATIONS_BOT_TOKEN }}
           base: development
