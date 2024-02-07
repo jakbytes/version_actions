@@ -18,7 +18,6 @@ inputs:
   trigger:
     description: 'The action trigger commit message, set manually'
     required: false
-    default: "none"
   commitFiles:
     description: 'List of of additional files paths to include in the release commit. For example: "file1.txt file2.txt"'
     required: false
@@ -51,12 +50,20 @@ runs:
       if: ${{ inputs.trigger }} != 'none'
       uses: jakbytes/version_actions/action/extract_commit@internal
 
+    - name: Determine ACTION_TRIGGER
+      id: set_action_trigger
+      shell: bash
+      run: |
+        if [[ -n "${{ inputs.trigger }}" ]]; then
+          echo "ACTION_TRIGGER=${{ inputs.trigger }}" >> $GITHUB_ENV
+        else
+          echo "ACTION_TRIGGER=${{ steps.commit.outputs.type }}" >> $GITHUB_ENV
+        fi
+
     - name: Run Action
       id: version
       shell: bash
       if: env.ACTION_TRIGGER != 'sync'
-      env:
-        ACTION_TRIGGER: ${{ inputs.trigger }} || ${{ steps.commit.outputs.type }}
       run: |
         ./version_action version ${{ inputs.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }} ${{ inputs.base }} ${{ inputs.prerelease }} ${{ inputs.release_branch }} ${{ env.ACTION_TRIGGER }} ${{ inputs.commitFiles }}
 
