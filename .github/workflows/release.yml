@@ -88,8 +88,8 @@ jobs:
 
       - name: Build
         run: |
-          go build action.go
-          chmod +x action
+          go build version_action.go
+          chmod +x version_action
 
       - name: Tag Internal
         if: github.ref_name == 'staging'

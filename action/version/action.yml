@@ -43,7 +43,7 @@ runs:
         repository_owner: 'jakbytes'
         repository_name: 'version_actions'
         tag: ${{ env.VERSION }}
-        file_name: 'action'
+        file_name: 'version_action'
         make_executable: true
 
     - name: Extract Commit

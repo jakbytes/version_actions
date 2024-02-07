@@ -13,21 +13,16 @@ runs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Get latest release
-      shell: bash
-      id: get-latest-release
-      run: |
-        LATEST_RELEASE_URL=$(curl -s -H "Authorization: token ${{ inputs.token }}" \
-        "https://api.github.com/repos/jakbytes/version_actions/releases/tags/v0.0.0-drc.0" \
-        | jq -r '.assets[] | select(.name == "action") | .browser_download_url')
-        echo "Latest release URL is $LATEST_RELEASE_URL"
-        echo "LATEST_RELEASE_URL=$LATEST_RELEASE_URL" >> $GITHUB_ENV # Fetching last two commits for commit message analysis
-
-    - name: Download latest release asset
-      shell: bash
-      run: |
-        curl -sL -o action ${{ env.LATEST_RELEASE_URL }}
-        chmod +x action
+    - name: Download Action
+      env:
+        VERSION: ${{ github.action_ref }}
+      uses: jakbytes/version_actions/action/download_release_asset@internal
+      with:
+        repository_owner: 'jakbytes'
+        repository_name: 'version_actions'
+        tag: ${{ env.VERSION }}
+        file_name: 'version_action'
+        make_executable: true
 
     - name: Run Action
       shell: bash
