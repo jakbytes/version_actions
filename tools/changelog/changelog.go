@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/google/go-github/v58/github"
-	"github.com/rs/zerolog/log"
 	"io/fs"
 	"os"
 	"strings"
@@ -92,14 +91,7 @@ func formatCommit(org, repo string, commit *github.RepositoryCommit) Markdown {
 	}
 
 	for _, line := range messageParts[1:] {
-		log.Debug().Msg(fmt.Sprintf("  > %s", line))
 		m = append(m, fmt.Sprintf("  > %s", line))
-	}
-
-	// Creating the Markdown formatted string
-
-	for _, line := range m {
-		log.Debug().Msg(line)
 	}
 	return m
 }

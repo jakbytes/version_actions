@@ -110,7 +110,7 @@ func testFeaturePR(t *testing.T) {
 	require.Equal(t, true, *pr.Draft)
 
 	expected := []string{
-		":robot: I have created a pull request *beep* *boop*",
+		"### :robot: I have created a pull request *beep* *boop*",
 		"",
 		"### Notes",
 		"",
@@ -124,7 +124,7 @@ func testFeaturePR(t *testing.T) {
 		"",
 		"- ([`hash1-h`](https://github.com/owner/name/commit/hash1-hash1)) init",
 		"",
-		"---",
+		"#",
 		"",
 		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
 	}
@@ -187,7 +187,7 @@ func testUpdateFeaturePR(t *testing.T) {
 	require.Equal(t, true, *pr.Draft)
 
 	expected := []string{
-		":robot: I have created a pull request *beep* *boop*",
+		"### :robot: I have created a pull request *beep* *boop*",
 		"",
 		"### Notes",
 		"",
@@ -205,7 +205,7 @@ func testUpdateFeaturePR(t *testing.T) {
 		"",
 		"- ([`hash2-h`](https://github.com/owner/name/commit/hash2-hash2)) fix related to the feature",
 		"",
-		"---",
+		"#",
 		"",
 		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
 	}
@@ -234,9 +234,7 @@ func testVersionRC(t *testing.T) {
 	require.Equal(t, false, *pr.Draft)
 
 	expected := []string{
-		":robot: I have created a release candidate *beep* *boop*",
-		"",
-		"---",
+		"### :robot: I have created a release candidate *beep* *boop*",
 		"",
 		"## [v0.0.0-drc.0] Initial Version _2022-01-01 00:00 UTC_",
 		"### Features",
@@ -247,7 +245,7 @@ func testVersionRC(t *testing.T) {
 		"",
 		"- ([`hash2-h`](https://github.com/owner/name/commit/hash2-hash2)) fix related to the feature",
 		"",
-		"---",
+		"#",
 		"",
 		"This release was composed by [version_actions](https://github.com/jakbytes/version_actions)",
 	}
@@ -330,9 +328,7 @@ func testUpdateVersionRC(t *testing.T) {
 	require.Equal(t, false, *pr.Draft)
 
 	expected := []string{
-		":robot: I have created a release candidate *beep* *boop*",
-		"",
-		"---",
+		"### :robot: I have created a release candidate *beep* *boop*",
 		"",
 		"## [v0.0.0-drc.0] Initial Version _2022-01-01 00:00 UTC_",
 		"### Features",
@@ -344,7 +340,7 @@ func testUpdateVersionRC(t *testing.T) {
 		"- ([`hash3-h`](https://github.com/owner/name/commit/hash3-hash3)) another fix related to the feature",
 		"- ([`hash2-h`](https://github.com/owner/name/commit/hash2-hash2)) fix related to the feature",
 		"",
-		"---",
+		"#",
 		"",
 		"This release was composed by [version_actions](https://github.com/jakbytes/version_actions)",
 	}
@@ -380,9 +376,7 @@ func testPrereleasePromotion(t *testing.T) {
 	require.Equal(t, false, *pr.Draft)
 
 	expected := []string{
-		":robot: I have created a release candidate *beep* *boop*",
-		"",
-		"---",
+		"### :robot: I have created a release candidate *beep* *boop*",
 		"",
 		"## [v0.0.0-src.0] Initial Version _2022-01-01 00:00 UTC_",
 		"### Features",
@@ -394,7 +388,7 @@ func testPrereleasePromotion(t *testing.T) {
 		"- ([`hash3-h`](https://github.com/owner/name/commit/hash3-hash3)) another fix related to the feature",
 		"- ([`hash2-h`](https://github.com/owner/name/commit/hash2-hash2)) fix related to the feature",
 		"",
-		"---",
+		"#",
 		"",
 		"This release was composed by [version_actions](https://github.com/jakbytes/version_actions)",
 	}
@@ -502,9 +496,7 @@ func testUpdatePrereleasePromotion(t *testing.T) {
 	require.Equal(t, false, *pr.Draft)
 
 	expected := []string{
-		":robot: I have created a release candidate *beep* *boop*",
-		"",
-		"---",
+		"### :robot: I have created a release candidate *beep* *boop*",
 		"",
 		"## [v0.0.0-src.1] Initial Version _2022-01-01 00:00 UTC_",
 		"### Features",
@@ -517,7 +509,7 @@ func testUpdatePrereleasePromotion(t *testing.T) {
 		"- ([`hash3-h`](https://github.com/owner/name/commit/hash3-hash3)) another fix related to the feature",
 		"- ([`hash2-h`](https://github.com/owner/name/commit/hash2-hash2)) fix related to the feature",
 		"",
-		"---",
+		"#",
 		"",
 		"This release was composed by [version_actions](https://github.com/jakbytes/version_actions)",
 	}
@@ -622,9 +614,7 @@ func testPromotion(t *testing.T) {
 	require.Equal(t, false, *pr.Draft)
 
 	expected := []string{
-		":robot: I have created a release *beep* *boop*",
-		"",
-		"---",
+		"### :robot: I have created a release *beep* *boop*",
 		"",
 		"## [v0.0.0] Initial Version _2022-01-01 00:00 UTC_",
 		"### Features",
@@ -637,7 +627,7 @@ func testPromotion(t *testing.T) {
 		"- ([`hash3-h`](https://github.com/owner/name/commit/hash3-hash3)) another fix related to the feature",
 		"- ([`hash2-h`](https://github.com/owner/name/commit/hash2-hash2)) fix related to the feature",
 		"",
-		"---",
+		"#",
 		"",
 		"This release was composed by [version_actions](https://github.com/jakbytes/version_actions)",
 	}
@@ -742,9 +732,7 @@ func testUpdatePromotion(t *testing.T) {
 	require.Equal(t, false, *pr.Draft)
 
 	expected := []string{
-		":robot: I have created a release *beep* *boop*",
-		"",
-		"---",
+		"### :robot: I have created a release *beep* *boop*",
 		"",
 		"## [v0.0.0] Initial Version _2022-01-01 00:00 UTC_",
 		"### Features",
@@ -757,7 +745,7 @@ func testUpdatePromotion(t *testing.T) {
 		"- ([`hash3-h`](https://github.com/owner/name/commit/hash3-hash3)) another fix related to the feature",
 		"- ([`hash2-h`](https://github.com/owner/name/commit/hash2-hash2)) fix related to the feature",
 		"",
-		"---",
+		"#",
 		"",
 		"This release was composed by [version_actions](https://github.com/jakbytes/version_actions)",
 	}

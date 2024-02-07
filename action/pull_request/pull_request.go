@@ -63,7 +63,7 @@ func composeBody(head *github.Branch, base string, existing *string) (body chang
 	cl := changelog.GenerateNewChangelog(head.RepositoryMetadata.Owner, head.RepositoryMetadata.Name, nil, nil, pc, true)
 	if existing == nil { // Create a new body
 		body = append(changelog.Markdown{
-			":robot: I have created a pull request *beep* *boop*",
+			"### :robot: I have created a pull request *beep* *boop*",
 			"",
 			"### Notes",
 			"",
@@ -76,7 +76,7 @@ func composeBody(head *github.Branch, base string, existing *string) (body chang
 		},
 			cl...)
 
-		body = append(body, "---", "",
+		body = append(body, "#", "",
 			"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
 		)
 
