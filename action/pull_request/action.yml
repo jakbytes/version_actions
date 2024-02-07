@@ -1,0 +1,30 @@
+name: 'Automated Pull Request Action'
+description: 'Automatically opens a draft pull request'
+inputs:
+  token:
+    description: 'GitHub token for creating and updating pull requests'
+    required: true
+  base:
+    description: 'The base branch to open the pull request against'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download Action
+      env:
+        VERSION: ${{ github.action_ref }}
+      uses: jakbytes/version_actions/action/download_release_asset@internal
+      with:
+        repository_owner: 'jakbytes'
+        repository_name: 'version_actions'
+        tag: ${{ env.VERSION }}
+        file_name: 'version_action'
+        make_executable: true
+
+    - name: Run Action
+      shell: bash
+      run: |
+        ./version_action pull_request ${{ inputs.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }} ${{ inputs.base }}
