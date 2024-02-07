@@ -27,13 +27,6 @@
 - ([`3b55e7f`](https://github.com/jakbytes/version_actions/commit/3b55e7fbce860c789836006c2c1e93ab3a1554ce)) actions need to reference the correct path
 - ([`ed5f7a3`](https://github.com/jakbytes/version_actions/commit/ed5f7a398dd060d3a9769c344206c2b86dad2959)) remove debugging action
 
-## [v0.1.0-src.0](https://github.com/jakbytes/version_actions/compare/v0.0.0...v0.1.0-src.0) (2024-02-07)
-### Features
-
-- ([`38f1bd1`](https://github.com/jakbytes/version_actions/commit/38f1bd1091e162416bbcc653da5865b8f70e2c49)) breaking changes text capitalized to call it out strongly
-- ([`7237226`](https://github.com/jakbytes/version_actions/commit/72372265d197605918b127c92eb75375c3715382)) date on version is simplified
-- ([`0ba489f`](https://github.com/jakbytes/version_actions/commit/0ba489f5f33d221061c149fed64166c26c6322ae)) extract prerelease identifier action
-
 ## [v0.0.0] Initial Version (2024-02-07)
 ### Features
 
