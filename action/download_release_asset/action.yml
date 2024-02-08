@@ -17,7 +17,7 @@ inputs:
     description: 'Set the downloaded file as executable with chmod +x'
     required: false
     default: 'false'
-  github_token:
+  token:
     description: 'GitHub token for downloading assets'
     required: true
 runs:
