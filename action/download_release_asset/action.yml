@@ -17,20 +17,13 @@ inputs:
     description: 'Set the downloaded file as executable with chmod +x'
     required: false
     default: 'false'
-  github_token:
-    description: 'Optional GitHub token for downloading assets from private repositories'
-    required: false
-    default: ''
+  token:
+    description: 'GitHub token for downloading assets'
+    required: true
 runs:
   using: 'composite'
   steps:
     - shell: bash
-      env:
-        REPOSITORY_OWNER: ${{ inputs.repository_owner }}
-        REPOSITORY_NAME: ${{ inputs.repository_name }}
-        TAG: ${{ inputs.tag }}
-        FILE_NAME: ${{ inputs.file_name }}
-        GITHUB_TOKEN: ${{ inputs.github_token || secrets.GITHUB_TOKEN }}
       run: |
         # Check if the file already exists
         if [ -e "${{ inputs.file_name }}" ]; then
@@ -38,15 +31,9 @@ runs:
         else
           DOWNLOAD_URL="https://github.com/${{ inputs.repository_owner }}/${{ inputs.repository_name }}/releases/download/${{ inputs.tag }}/${{ inputs.file_name }}"
           echo "Download URL: $DOWNLOAD_URL"
-        
-          # Use the provided GitHub token or default to the automatic GITHUB_TOKEN
-          AUTH_HEADER=""
-          if [ -n "$GITHUB_TOKEN" ]; then
-            AUTH_HEADER="-H 'Authorization: token $GITHUB_TOKEN'"
-          fi
-        
-          curl -sL -o "${{ inputs.file_name }}" $AUTH_HEADER "$DOWNLOAD_URL"
-        
+          
+          curl -sL -o "${{ inputs.file_name }}" -H "Authorization: token ${{ inputs.token }}" "$DOWNLOAD_URL"
+          
           if [[ "${{ inputs.make_executable }}" == "true" ]]; then
             chmod +x ${{ inputs.file_name }}
             echo "File set as executable."
