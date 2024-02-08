@@ -7,7 +7,7 @@ inputs:
 outputs:
   identifier:
     description: 'The prerelease identifier (e.g. for v1.0.0-rc.1 it would be rc)'
-    value: ${{ steps.extract_prerelease_identifier.outputs.identifier }}
+    value: ${{ steps.prerelease_identifier.outputs.identifier }}
   sequence:
     description: 'The sequence number of the prerelease identifier (e.g. for v1.0.0-rc.1 it would be 1)'
     value: ${{ steps.prerelease_identifier.outputs.sequence }}
