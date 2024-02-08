@@ -1,6 +1,6 @@
 # Changelog
 
-## [v1.0.1-drc.1](https://github.com/jakbytes/version_actions/compare/v1.0.0...v1.0.1-drc.1) (2024-02-08)
+## [v1.0.1-src.1](https://github.com/jakbytes/version_actions/compare/v1.0.0...v1.0.1-src.1) (2024-02-08)
 ### Fixes
 
 - ([`362c4ce`](https://github.com/jakbytes/version_actions/commit/362c4ce03fc643e689acb2bccfb1be8ed46149f7)) output was not set properly for identifier
