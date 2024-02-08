@@ -18,9 +18,8 @@ inputs:
     required: false
     default: 'false'
   github_token:
-    description: 'Optional GitHub token for downloading assets from private repositories'
-    required: false
-    default: ''
+    description: 'GitHub token for downloading assets'
+    required: true
 runs:
   using: 'composite'
   steps:
@@ -30,7 +29,7 @@ runs:
         REPOSITORY_NAME: ${{ inputs.repository_name }}
         TAG: ${{ inputs.tag }}
         FILE_NAME: ${{ inputs.file_name }}
-        GITHUB_TOKEN: ${{ inputs.github_token || secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github_token }}
       run: |
         # Check if the file already exists
         if [ -e "${{ inputs.file_name }}" ]; then
@@ -38,12 +37,8 @@ runs:
         else
           DOWNLOAD_URL="https://github.com/${{ inputs.repository_owner }}/${{ inputs.repository_name }}/releases/download/${{ inputs.tag }}/${{ inputs.file_name }}"
           echo "Download URL: $DOWNLOAD_URL"
-        
-          # Use the provided GitHub token or default to the automatic GITHUB_TOKEN
-          AUTH_HEADER=""
-          if [ -n "$GITHUB_TOKEN" ]; then
-            AUTH_HEADER="-H 'Authorization: token $GITHUB_TOKEN'"
-          fi
+      
+          AUTH_HEADER="-H 'Authorization: token $GITHUB_TOKEN'"
         
           curl -sL -o "${{ inputs.file_name }}" $AUTH_HEADER "$DOWNLOAD_URL"
         
