@@ -1,9 +1,20 @@
 # Changelog
 
-## [v0.2.0-src.0](https://github.com/jakbytes/version_actions/compare/v0.1.1...v0.2.0-src.0) (2024-02-08)
+## [v1.0.0-drc.0](https://github.com/jakbytes/version_actions/compare/v0.1.1...v1.0.0-drc.0) (2024-02-08)
+### ⚠ BREAKING CHANGES
+
+- ([`c5d049e`](https://github.com/jakbytes/version_actions/commit/c5d049ee3e5fc513aace47b03ead2286671feace)) require passed token, updated various actions to account for that
+  > 
+  > BREAKING CHANGE: tokens are required in some actions where they were not before
+
 ### Features
 
 - ([`1f982dc`](https://github.com/jakbytes/version_actions/commit/1f982dcc79afd547a03617ee6fee43bb22b4b27b)) support passing in token for private repositories
+
+### Fixes
+
+- ([`8f34822`](https://github.com/jakbytes/version_actions/commit/8f348224905504dc70598287f53e5ca207dd88a2)) token download not working properly
+- ([`6b99a7c`](https://github.com/jakbytes/version_actions/commit/6b99a7c5b40138c8cb28f9190a0187199cf6501f)) use token not github_token
 
 ## [v0.1.1](https://github.com/jakbytes/version_actions/compare/v0.1.0...v0.1.1) (2024-02-07)
 ### Fixes
