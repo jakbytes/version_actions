@@ -17,6 +17,10 @@ inputs:
     description: 'Set the downloaded file as executable with chmod +x'
     required: false
     default: 'false'
+  github_token:
+    description: 'Optional GitHub token for downloading assets from private repositories'
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
@@ -26,6 +30,7 @@ runs:
         REPOSITORY_NAME: ${{ inputs.repository_name }}
         TAG: ${{ inputs.tag }}
         FILE_NAME: ${{ inputs.file_name }}
+        GITHUB_TOKEN: ${{ inputs.github_token || secrets.GITHUB_TOKEN }}
       run: |
         # Check if the file already exists
         if [ -e "${{ inputs.file_name }}" ]; then
@@ -33,9 +38,15 @@ runs:
         else
           DOWNLOAD_URL="https://github.com/${{ inputs.repository_owner }}/${{ inputs.repository_name }}/releases/download/${{ inputs.tag }}/${{ inputs.file_name }}"
           echo "Download URL: $DOWNLOAD_URL"
-          
-          curl -sL -o "${{ inputs.file_name }}" "$DOWNLOAD_URL"
-          
+        
+          # Use the provided GitHub token or default to the automatic GITHUB_TOKEN
+          AUTH_HEADER=""
+          if [ -n "$GITHUB_TOKEN" ]; then
+            AUTH_HEADER="-H 'Authorization: token $GITHUB_TOKEN'"
+          fi
+        
+          curl -sL -o "${{ inputs.file_name }}" $AUTH_HEADER "$DOWNLOAD_URL"
+        
           if [[ "${{ inputs.make_executable }}" == "true" ]]; then
             chmod +x ${{ inputs.file_name }}
             echo "File set as executable."
