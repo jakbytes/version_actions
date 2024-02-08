@@ -1,6 +1,6 @@
 # Changelog
 
-## [v1.0.0-drc.0](https://github.com/jakbytes/version_actions/compare/v0.1.1...v1.0.0-drc.0) (2024-02-08)
+## [v1.0.0-src.0](https://github.com/jakbytes/version_actions/compare/v0.1.1...v1.0.0-src.0) (2024-02-08)
 ### ⚠ BREAKING CHANGES
 
 - ([`c5d049e`](https://github.com/jakbytes/version_actions/commit/c5d049ee3e5fc513aace47b03ead2286671feace)) require passed token, updated various actions to account for that
