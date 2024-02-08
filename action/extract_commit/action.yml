@@ -1,5 +1,9 @@
 name: 'Extract Commit Type'
 description: 'Extracts the last valid conventional commit.'
+inputs:
+  token:
+    description: 'The GitHub token'
+    required: true
 outputs:
   type:
     description: 'The type of the last valid conventional commit'
@@ -35,9 +39,10 @@ runs:
         tag: ${{ env.VERSION }}
         file_name: 'version_action'
         make_executable: true
+        token: ${{ inputs.token }}
 
     - name: Run Action
       id: extract_commit
       shell: bash
       run: |
-        ./version_action extract_commit ${{ github.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }}
+        ./version_action extract_commit ${{ inputs.token }} ${{ github.repository_owner }} ${{ github.event.repository.name }} ${{ github.ref_name }}

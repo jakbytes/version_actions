@@ -23,6 +23,7 @@ runs:
         tag: ${{ env.VERSION }}
         file_name: 'version_action'
         make_executable: true
+        token: ${{ inputs.token }}
 
     - name: Run Action
       shell: bash

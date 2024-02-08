@@ -47,11 +47,14 @@ runs:
         tag: ${{ env.VERSION }}
         file_name: 'version_action'
         make_executable: true
+        token: ${{ inputs.token }}
 
     - name: Extract Commit
       id: commit
       if: ${{ inputs.trigger }} != 'none'
       uses: jakbytes/version_actions/action/extract_commit@internal
+      with:
+        token: ${{ inputs.token }}
 
     - name: Determine ACTION_TRIGGER
       id: set_action_trigger

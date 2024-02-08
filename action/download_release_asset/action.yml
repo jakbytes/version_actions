@@ -17,15 +17,13 @@ inputs:
     description: 'Set the downloaded file as executable with chmod +x'
     required: false
     default: 'false'
+  token:
+    description: 'GitHub token for downloading assets'
+    required: true
 runs:
   using: 'composite'
   steps:
     - shell: bash
-      env:
-        REPOSITORY_OWNER: ${{ inputs.repository_owner }}
-        REPOSITORY_NAME: ${{ inputs.repository_name }}
-        TAG: ${{ inputs.tag }}
-        FILE_NAME: ${{ inputs.file_name }}
       run: |
         # Check if the file already exists
         if [ -e "${{ inputs.file_name }}" ]; then
@@ -34,7 +32,7 @@ runs:
           DOWNLOAD_URL="https://github.com/${{ inputs.repository_owner }}/${{ inputs.repository_name }}/releases/download/${{ inputs.tag }}/${{ inputs.file_name }}"
           echo "Download URL: $DOWNLOAD_URL"
           
-          curl -sL -o "${{ inputs.file_name }}" "$DOWNLOAD_URL"
+          curl -sL -o "${{ inputs.file_name }}" -H "Authorization: token ${{ inputs.token }}" "$DOWNLOAD_URL"
           
           if [[ "${{ inputs.make_executable }}" == "true" ]]; then
             chmod +x ${{ inputs.file_name }}
