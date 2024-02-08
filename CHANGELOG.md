@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.2.0-drc.0](https://github.com/jakbytes/version_actions/compare/v0.1.1...v0.2.0-drc.0) (2024-02-08)
+### Features
+
+- ([`1f982dc`](https://github.com/jakbytes/version_actions/commit/1f982dcc79afd547a03617ee6fee43bb22b4b27b)) support passing in token for private repositories
+
 ## [v0.1.1](https://github.com/jakbytes/version_actions/compare/v0.1.0...v0.1.1) (2024-02-07)
 ### Fixes
 
