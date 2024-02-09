@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.0.2-drc.2](https://github.com/jakbytes/version_actions/compare/v1.0.1...v1.0.2-drc.2) (2024-02-09)
+### Fixes
+
+- ([`0dc65ac`](https://github.com/jakbytes/version_actions/commit/0dc65ac15feb19a905bcef1cf1099362e2e0c7ad)) shouldn't stop PR if version increment is -1 and this is first version
+
 ## [v1.0.1](https://github.com/jakbytes/version_actions/compare/v1.0.0...v1.0.1) (2024-02-08)
 ### Fixes
 
