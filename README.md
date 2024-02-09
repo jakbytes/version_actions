@@ -1,5 +1,6 @@
 # version_actions
 
+## Warning: This is a work in progress, you can probably accomplish what you need with a combination of other github actions and bash scripts.
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/jakbytes/version_actions)](https://goreportcard.com/report/github.com/jakbytes/version_actions)
 [![codecov](https://codecov.io/gh/jakbytes/version_actions/graph/badge.svg?token=QTT22V13C4)](https://codecov.io/gh/jakbytes/version_actions)
