@@ -1,8 +1,9 @@
 # Changelog
 
-## [v1.0.3-src.5](https://github.com/jakbytes/version_actions/compare/v1.0.2...v1.0.3-src.5) (2024-02-13)
+## [v1.0.3-drc.4](https://github.com/jakbytes/version_actions/compare/v1.0.2...v1.0.3-drc.4) (2024-02-13)
 ### Fixes
 
+- ([`199b999`](https://github.com/jakbytes/version_actions/commit/199b999fb7286eab3296e88fca14205d031090f5)) monitor flow
 - ([`636227a`](https://github.com/jakbytes/version_actions/commit/636227af427e8ed0f0635572730768b1cb1602b9)) sync should ff if available
 - ([`054a002`](https://github.com/jakbytes/version_actions/commit/054a0028b5df9de13b216a8913abb450221d4e68)) remove newline
 - ([`a3c968c`](https://github.com/jakbytes/version_actions/commit/a3c968c7fd4da7633983d853b0142e81f2ebe4dc)) sync should ff if available, commit message if not available
