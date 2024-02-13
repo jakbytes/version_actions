@@ -1,6 +1,6 @@
 # Changelog
 
-## [v1.0.3-drc.4](https://github.com/jakbytes/version_actions/compare/v1.0.2...v1.0.3-drc.4) (2024-02-13)
+## [v1.0.3-src.6](https://github.com/jakbytes/version_actions/compare/v1.0.2...v1.0.3-src.6) (2024-02-13)
 ### Fixes
 
 - ([`199b999`](https://github.com/jakbytes/version_actions/commit/199b999fb7286eab3296e88fca14205d031090f5)) monitor flow
