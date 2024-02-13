@@ -1,6 +1,6 @@
 # Changelog
 
-## [v1.0.3-drc.3](https://github.com/jakbytes/version_actions/compare/v1.0.2...v1.0.3-drc.3) (2024-02-09)
+## [v1.0.3-src.3](https://github.com/jakbytes/version_actions/compare/v1.0.2...v1.0.3-src.3) (2024-02-13)
 ### Fixes
 
 - ([`a3c968c`](https://github.com/jakbytes/version_actions/commit/a3c968c7fd4da7633983d853b0142e81f2ebe4dc)) sync should ff if available, commit message if not available
