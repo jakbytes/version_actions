@@ -1,5 +1,14 @@
 # Changelog
 
+## [v1.1.0-drc.0](https://github.com/jakbytes/version_actions/compare/v1.0.3...v1.1.0-drc.0) (2024-02-16)
+### Features
+
+- ([`f787f07`](https://github.com/jakbytes/version_actions/commit/f787f0781aea855bfd46b686a860678d23338298)) add chore to changelog
+
+### Fixes
+
+- ([`0abefd7`](https://github.com/jakbytes/version_actions/commit/0abefd7355a6db1bd69971ae9e057654f822d7ca)) if PR is removed because of force reset branch it shouldn't fail but instead create a new branch
+
 ## [v1.0.3-drc.4](https://github.com/jakbytes/version_actions/compare/v1.0.2...v1.0.3-drc.4) (2024-02-13)
 ### Fixes
 
