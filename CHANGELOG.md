@@ -1,8 +1,13 @@
 # Changelog
 
-## [v1.0.3](https://github.com/jakbytes/version_actions/compare/v1.0.2...v1.0.3) (2024-02-13)
+## [v1.1.0](https://github.com/jakbytes/version_actions/compare/v1.0.3...v1.1.0) (2024-02-16)
+### Features
+
+- ([`f787f07`](https://github.com/jakbytes/version_actions/commit/f787f0781aea855bfd46b686a860678d23338298)) add chore to changelog
+
 ### Fixes
 
+- ([`0abefd7`](https://github.com/jakbytes/version_actions/commit/0abefd7355a6db1bd69971ae9e057654f822d7ca)) if PR is removed because of force reset branch it shouldn't fail but instead create a new branch
 - ([`199b999`](https://github.com/jakbytes/version_actions/commit/199b999fb7286eab3296e88fca14205d031090f5)) monitor flow
 - ([`9498bcc`](https://github.com/jakbytes/version_actions/commit/9498bcce2657d3c8cfde89878b3aafe8ca7d3a07)) sync should ff if available
 - ([`636227a`](https://github.com/jakbytes/version_actions/commit/636227af427e8ed0f0635572730768b1cb1602b9)) sync should ff if available
