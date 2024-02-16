@@ -7,6 +7,7 @@ import (
 	"github.com/leodido/go-conventionalcommits/parser"
 	"github.com/rs/zerolog/log"
 	"sort"
+	"strings"
 )
 
 // Increment is a type that represents the type of increment to make to the version.
@@ -64,6 +65,15 @@ func (c *Commits) Increment() Increment {
 	if len(c.Fix) > 0 {
 		return Patch
 	}
+	if len(c.Chore) > 0 {
+		for _, commit := range c.Chore {
+			if strings.Contains(*commit.Commit.Message, "(deps)") {
+				return Patch
+			}
+
+		}
+	}
+
 	return -1
 }
 
