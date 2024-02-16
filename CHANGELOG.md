@@ -1,6 +1,6 @@
 # Changelog
 
-## [v1.1.0-src.0](https://github.com/jakbytes/version_actions/compare/v1.0.3...v1.1.0-src.0) (2024-02-16)
+## [v1.1.0](https://github.com/jakbytes/version_actions/compare/v1.0.3...v1.1.0) (2024-02-16)
 ### Features
 
 - ([`f787f07`](https://github.com/jakbytes/version_actions/commit/f787f0781aea855bfd46b686a860678d23338298)) add chore to changelog
@@ -8,10 +8,6 @@
 ### Fixes
 
 - ([`0abefd7`](https://github.com/jakbytes/version_actions/commit/0abefd7355a6db1bd69971ae9e057654f822d7ca)) if PR is removed because of force reset branch it shouldn't fail but instead create a new branch
-- ([`199b999`](https://github.com/jakbytes/version_actions/commit/199b999fb7286eab3296e88fca14205d031090f5)) monitor flow
-- ([`636227a`](https://github.com/jakbytes/version_actions/commit/636227af427e8ed0f0635572730768b1cb1602b9)) sync should ff if available
-- ([`054a002`](https://github.com/jakbytes/version_actions/commit/054a0028b5df9de13b216a8913abb450221d4e68)) remove newline
-- ([`a3c968c`](https://github.com/jakbytes/version_actions/commit/a3c968c7fd4da7633983d853b0142e81f2ebe4dc)) sync should ff if available, commit message if not available
 
 ## [v1.0.2](https://github.com/jakbytes/version_actions/compare/v1.0.1...v1.0.2) (2024-02-09)
 ### Fixes
