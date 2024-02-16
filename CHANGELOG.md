@@ -1,6 +1,6 @@
 # Changelog
 
-## [v1.1.0-drc.0](https://github.com/jakbytes/version_actions/compare/v1.0.3...v1.1.0-drc.0) (2024-02-16)
+## [v1.1.0-src.0](https://github.com/jakbytes/version_actions/compare/v1.0.3...v1.1.0-src.0) (2024-02-16)
 ### Features
 
 - ([`f787f07`](https://github.com/jakbytes/version_actions/commit/f787f0781aea855bfd46b686a860678d23338298)) add chore to changelog
