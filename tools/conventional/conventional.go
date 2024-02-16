@@ -47,6 +47,7 @@ type Commits struct {
 	Build    []*github.RepositoryCommit
 	CI       []*github.RepositoryCommit
 	Debug    []*github.RepositoryCommit
+	Chore    []*github.RepositoryCommit
 }
 
 // Increment returns the increment type based on the collection of commits.
@@ -113,6 +114,8 @@ func ParseCommits(commits map[string]*github.RepositoryCommit) (parsed Commits) 
 				parsed.CI = insert(parsed.CI, commit, less)
 			} else if message.IsDebug() {
 				parsed.Debug = insert(parsed.Debug, commit, less)
+			} else if message.IsChore() {
+				parsed.Chore = insert(parsed.Chore, commit, less)
 			}
 
 		}

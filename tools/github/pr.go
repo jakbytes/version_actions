@@ -84,6 +84,9 @@ func (c *Client) SetPullRequest(head, base, title string, draft bool, composeBod
 		_, err = c.CreatePullRequest(head, base, title, body, draft)
 	} else {
 		_, err = c.EditPullRequest(head, base, title, body)
+		if errors.Is(err, NoPullRequestFoundError{}) {
+			_, err = c.CreatePullRequest(head, base, title, body, draft)
+		}
 	}
 	return err
 }

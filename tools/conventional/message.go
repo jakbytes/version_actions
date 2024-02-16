@@ -78,3 +78,7 @@ func (m *Message) IsCI() bool {
 func (m *Message) IsDebug() bool {
 	return validateCommitMessage("debug", *m.Commit.Message)
 }
+
+func (m *Message) IsChore() bool {
+	return validateCommitMessage("chore", *m.Commit.Message)
+}
