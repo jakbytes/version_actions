@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.0](https://github.com/jakbytes/version_actions/compare/v1.1.0...v1.2.0) (2024-02-16)
+### Features
+
+- ([`df1846b`](https://github.com/jakbytes/version_actions/commit/df1846bc69b656c36e0e5c45c9e2dced809d336c)) chores should trigger patch version update if they're deps related
+
 ## [v1.1.0](https://github.com/jakbytes/version_actions/compare/v1.0.3...v1.1.0) (2024-02-16)
 ### Features
 
