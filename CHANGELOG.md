@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.1](https://github.com/jakbytes/version_actions/compare/v1.2.0...v1.2.1) (2024-02-20)
+### Fixes
+
+- ([`07cbc39`](https://github.com/jakbytes/version_actions/commit/07cbc3960f481b17afc9085cd1c3faf537b5d6ab)) best effort
+
 ## [v1.2.0](https://github.com/jakbytes/version_actions/compare/v1.1.0...v1.2.0) (2024-02-16)
 ### Features
 
