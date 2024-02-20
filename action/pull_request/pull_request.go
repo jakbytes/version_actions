@@ -77,7 +77,7 @@ func composeBody(head *github.Branch, base string, existing *string) (body chang
 			cl...)
 
 		body = append(body, "#", "",
-			"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+			"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 		)
 
 		return

@@ -103,7 +103,7 @@ func TestComposePullRequestBody(t *testing.T) {
 		"",
 		"#",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	for i, line := range body {
@@ -137,7 +137,7 @@ func TestUpdateBody(t *testing.T) {
 		"",
 		"---",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	expected := []string{
@@ -156,7 +156,7 @@ func TestUpdateBody(t *testing.T) {
 		"",
 		"---",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	body := updateBody(existing, changelog)
@@ -191,7 +191,7 @@ func TestUpdateBody(t *testing.T) {
 		"",
 		"---",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	expected = []string{
@@ -211,7 +211,7 @@ func TestUpdateBody(t *testing.T) {
 		"",
 		"---",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	body = updateBody(existing, changelog)
@@ -247,7 +247,7 @@ func TestUpdateBody(t *testing.T) {
 		"",
 		"---",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	expected = []string{
@@ -268,7 +268,7 @@ func TestUpdateBody(t *testing.T) {
 		"",
 		"---",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	body = updateBody(existing, changelog)
@@ -311,7 +311,7 @@ func TestComposePullRequestBody_ExistingBody(t *testing.T) {
 		"",
 		"---",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	for i, line := range body {
@@ -437,7 +437,7 @@ func TestSetPullRequest(t *testing.T) {
 		"",
 		"---",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	for i, line := range strings.Split(body, "\n") {
@@ -497,7 +497,7 @@ func TestSetPullRequest_ExistingPullRequest(t *testing.T) {
 		"",
 		"---",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	for i, line := range strings.Split(body, "\n") {

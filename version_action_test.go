@@ -126,7 +126,7 @@ func testFeaturePR(t *testing.T) {
 		"",
 		"#",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	for i, line := range strings.Split(*pr.Body, "\n") {
@@ -207,7 +207,7 @@ func testUpdateFeaturePR(t *testing.T) {
 		"",
 		"#",
 		"",
-		"This Changelog was composed by [version-action](https://github.com/jakbytes/version-action)",
+		"This Changelog was composed by [version_action](https://github.com/jakbytes/version_action)",
 	}
 
 	for i, line := range strings.Split(*pr.Body, "\n") {

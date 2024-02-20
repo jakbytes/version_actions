@@ -57,7 +57,7 @@ jobs:
 
       - name: Automated Pull Request
         id: semver_action
-        uses: jakbytes/version-action/pull_request@v0.1.4
+        uses: jakbytes/version_action/pull_request@v0.1.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: "main"
