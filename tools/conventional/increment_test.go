@@ -50,6 +50,8 @@ func TestBumpVersion(t *testing.T) {
 		{"Default Patch Increment", semver.MustParse("1.2.3"), nil, "main", "main", Patch, "prerelease", semver.MustParse("1.2.4"), false, nil},
 		{"Default Minor Increment", semver.MustParse("1.2.3"), nil, "main", "main", Minor, "prerelease", semver.MustParse("1.3.0"), false, nil},
 		{"Default Major Increment", semver.MustParse("1.2.3"), nil, "main", "main", Major, "prerelease", semver.MustParse("2.0.0"), false, nil},
+
+		{"Old Release Candidate", semver.MustParse("0.1.0"), semver.MustParse("0.1.0-alpha.13"), "main", "alpha", Patch, "alpha", semver.MustParse("0.1.1-alpha.0"), false, nil},
 	}
 
 	// Iterate over the test cases

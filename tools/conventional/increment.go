@@ -1,6 +1,7 @@
 package conventional
 
 import (
+	"fmt"
 	"github.com/jakbytes/version_actions/tools/semver"
 )
 
@@ -58,7 +59,8 @@ func incPrereleaseVersion(newVersion *semver.Version, curReleaseCandidate *semve
 		if err != nil {
 			return nil, err
 		}
-		if curReleaseCandidate.PrereleaseIdentifier() == prereleaseIdentifier {
+		if curReleaseCandidate.PrereleaseIdentifier() == prereleaseIdentifier && // if the new version is a greater base version than the current release candidate we can restart from 0
+			!newVersion.GreaterThan(semver.MustParse(fmt.Sprintf("%d.%d.%d", curReleaseCandidate.Major(), curReleaseCandidate.Minor(), curReleaseCandidate.Patch()))) {
 			return newVersion.AsPrereleaseVersion(prereleaseIdentifier, rcValue+1)
 		} else {
 			return newVersion.AsPrereleaseVersion(prereleaseIdentifier, 0)
