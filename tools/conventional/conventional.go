@@ -70,7 +70,6 @@ func (c *Commits) Increment() Increment {
 			if strings.Contains(*commit.Commit.Message, "(deps)") {
 				return Patch
 			}
-
 		}
 	}
 

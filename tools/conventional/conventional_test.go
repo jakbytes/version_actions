@@ -35,6 +35,7 @@ func TestParseCommits(t *testing.T) {
 		expectTest     int
 		expectBuild    int
 		expectCI       int
+		expectChore    int
 	}{
 		{
 			name: "Commit with breaking change",
@@ -43,6 +44,14 @@ func TestParseCommits(t *testing.T) {
 			},
 			expectBump:     Major,
 			expectBreaking: 1,
+		},
+		{
+			name: "dependabot commit",
+			commits: map[string]*github.RepositoryCommit{
+				"1": mockCommit("chore(deps): bump github.com/rs/zerolog from 1.31.0 to 1.32.0\nBumps [github.com/rs/zerolog](https://github.com/rs/zerolog) from 1.31.0 to 1.32.0.\n- [Release notes](https://github.com/rs/zerolog/releases)\n- [Commits](rs/zerolog@v1.31.0...v1.32.0)\n\n---\nupdated-dependencies:\n- dependency-name: github.com/rs/zerolog\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>", time.Now()),
+			},
+			expectBump:  Patch,
+			expectChore: 1,
 		},
 		{
 			name: "Commit with ! for breaking change",
@@ -165,6 +174,7 @@ func TestParseCommits(t *testing.T) {
 			assert.Len(t, parsed.Test, tc.expectTest)
 			assert.Len(t, parsed.Build, tc.expectBuild)
 			assert.Len(t, parsed.CI, tc.expectCI)
+			assert.Len(t, parsed.Chore, tc.expectChore)
 
 			// Assuming all parsed are merged into a single slice for sorting validation
 			for _, commits := range [][]*github.RepositoryCommit{parsed.Breaking, parsed.Feat, parsed.Fix} {

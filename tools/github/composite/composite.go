@@ -74,7 +74,6 @@ func (h *Handler) Commits() (commits *conventional.Commits) {
 		if h.Head == h.ReleaseBranch {
 			if h.Latest != nil {
 				sha = h.Latest.Commit.SHA
-				log.Debug().Msgf("Getting commits since %s", *sha)
 			}
 			raw, err = h.head().GetCommitsSinceCommit(sha)
 			if err != nil {

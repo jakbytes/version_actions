@@ -57,8 +57,8 @@ func (b *Branch) GetCommitsSinceCommit(hash *string) (map[string]*github.Reposit
 		}
 		for _, commit := range pages {
 			if hash != nil {
-				log.Debug().Msgf("> Commit: %s", *commit.SHA)
-				log.Debug().Msgf(">   Hash: %s", *hash)
+				log.Trace().Msgf("> Commit: %s", *commit.SHA)
+				log.Trace().Msgf(">   Hash: %s", *hash)
 				log.Debug().Msgf(">  Equal: %t", *commit.SHA == *hash)
 			}
 			if hash != nil && *commit.SHA == *hash {

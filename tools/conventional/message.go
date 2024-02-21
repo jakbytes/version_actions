@@ -33,7 +33,7 @@ func getCompiledRegex(commitType string) *regexp.Regexp {
 	}
 
 	// Compile the regex
-	pattern := fmt.Sprintf("^%s(\\(.*\\))?:\\s.*$", regexp.QuoteMeta(commitType))
+	pattern := fmt.Sprintf("^%s(\\(.*\\))?:\\s[\\s\\S]*$", regexp.QuoteMeta(commitType))
 	re := regexp.MustCompile(pattern)
 
 	// Store the compiled regex in the map
