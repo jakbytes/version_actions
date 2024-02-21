@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.2](https://github.com/jakbytes/version_actions/compare/v1.2.1...v1.2.2) (2024-02-20)
+### Fixes
+
+- ([`e938309`](https://github.com/jakbytes/version_actions/commit/e938309d5ca33b6241ae835dd31d403e13e832a7)) version-action should be version_action
+
 ## [v1.2.1](https://github.com/jakbytes/version_actions/compare/v1.2.0...v1.2.1) (2024-02-20)
 ### Fixes
 
