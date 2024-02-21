@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.3](https://github.com/jakbytes/version_actions/compare/v1.2.2...v1.2.3) (2024-02-21)
+### Fixes
+
+- ([`64a920f`](https://github.com/jakbytes/version_actions/commit/64a920ff16aaea36aaaf352c280bcd408bfc5fae)) version v0.1.0 with prerelease v0.1.1 should restart the prerelease version num
+
 ## [v1.2.2](https://github.com/jakbytes/version_actions/compare/v1.2.1...v1.2.2) (2024-02-20)
 ### Fixes
 
