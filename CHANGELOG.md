@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.4](https://github.com/jakbytes/version_actions/compare/v1.2.3...v1.2.4) (2024-02-21)
+### Fixes
+
+- ([`373ade2`](https://github.com/jakbytes/version_actions/commit/373ade24ab6068b990d477064cb121ace320c688)) better handling of dependabot commits
+
 ## [v1.2.3](https://github.com/jakbytes/version_actions/compare/v1.2.2...v1.2.3) (2024-02-21)
 ### Fixes
 
