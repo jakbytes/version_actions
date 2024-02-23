@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.5](https://github.com/jakbytes/version_actions/compare/v1.2.4...v1.2.5) (2024-02-23)
+### Fixes
+
+- ([`bf393b1`](https://github.com/jakbytes/version_actions/commit/bf393b139b4ae999bc8c02c8a4ba7c78ac6f83c0)) best effort on extract commit
+
 ## [v1.2.4](https://github.com/jakbytes/version_actions/compare/v1.2.3...v1.2.4) (2024-02-21)
 ### Fixes
 
