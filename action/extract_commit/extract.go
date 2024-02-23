@@ -25,6 +25,7 @@ func ExtractCommit() {
 
 	parser := conventional.Parser{Machine: cparser.NewMachine(
 		conventionalcommits.WithTypes(conventionalcommits.TypesFreeForm),
+		conventionalcommits.WithBestEffort(),
 	)}
 
 	branch, err := client.Repository().Branch(branchName)
