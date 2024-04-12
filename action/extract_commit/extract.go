@@ -8,6 +8,7 @@ import (
 	"github.com/jakbytes/version_actions/tools/github"
 	"github.com/leodido/go-conventionalcommits"
 	cparser "github.com/leodido/go-conventionalcommits/parser"
+	"github.com/rs/zerolog/log"
 	"os"
 	"strings"
 )
@@ -43,6 +44,7 @@ func ExtractCommit() {
 			commit := parser.ParseCommit(rawCommit)
 			if commit != nil && commit.Ok() {
 				tools.OpenOutput(func(out tools.Output) {
+					log.Debug().Msgf("commit %v", commit)
 					out.Set("type", &commit.Type)
 					out.Set("description", &commit.Description)
 					out.Set("scope", commit.Scope)
@@ -60,9 +62,6 @@ func ExtractCommit() {
 						out.Set("footers", tools.String(strings.Join(footers, "; ")))
 					}
 				})
-				if err != nil {
-					panic(err)
-				}
 				os.Exit(0)
 			}
 		}
