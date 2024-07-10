@@ -3,7 +3,9 @@ package tools
 import (
 	"fmt"
 	"github.com/jakbytes/version_actions/internal/utility"
+	"html"
 	"os"
+	"strings"
 )
 
 func String(input string) *string {
@@ -31,7 +33,27 @@ func (o *Output) Set(key string, value *string) {
 	if value == nil {
 		return
 	}
-	if _, err := o.WriteString(fmt.Sprintf("%s=%s\n", key, *value)); err != nil {
+	if _, err := o.WriteString(fmt.Sprintf("%s=%s\n", key, escapeGitHubActionsOutput(*value))); err != nil {
 		panic(err)
 	}
+}
+
+func escapeGitHubActionsOutput(text string) string {
+	// HTML escape the text first
+	text = html.EscapeString(text)
+
+	// Escape GitHub Actions specific characters
+	replacements := []struct {
+		old string
+		new string
+	}{
+		{"%", "%25"},
+		{"\n", "%0A"},
+		{"\r", "%0D"},
+		{"]", "%5D"},
+	}
+	for _, r := range replacements {
+		text = strings.ReplaceAll(text, r.old, r.new)
+	}
+	return text
 }
