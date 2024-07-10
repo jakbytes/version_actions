@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.2.6-drc.0](https://github.com/jakbytes/version_actions/compare/v1.2.5...v1.2.6-drc.0) (2024-07-10)
+### Fixes
+
+- ([`affcd66`](https://github.com/jakbytes/version_actions/commit/affcd66419d17bba0b6658f6dcd14b1993857072)) escape new lines in body of action?
+- ([`81a53cb`](https://github.com/jakbytes/version_actions/commit/81a53cba0baac4d7cfffa14cce63ef392f38a9df)) parse failure
+
 ## [v1.2.4](https://github.com/jakbytes/version_actions/compare/v1.2.3...v1.2.4) (2024-02-21)
 ### Fixes
 
